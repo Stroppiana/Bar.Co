@@ -4,25 +4,20 @@ public class Producto {
 	private int idProducto;
 	private String nombre;
 	private int peso;
-	private String tamaño;
 	private String fragil;
 	
 	
 	public Producto(String nombre, String fragil,int peso) {
 		super();
-		this.idProducto = idProducto;
 		this.nombre = nombre;
 		this.fragil = fragil;
 		this.peso = peso;
-		this.tamaño = tamaño;
-	
 	}
 
 
 	@Override
 	public String toString() {
-		return "Producto [idProducto=" + idProducto + ", nombre=" + nombre + ", peso=" + peso + ", tamaño=" + tamaño
-				+ ", fragil=" + fragil + "]";
+		return "Producto [idProducto=" + idProducto + ", nombre=" + nombre + ", peso=" + peso  + ", fragil=" + fragil + "]";
 	}
 
 
@@ -44,12 +39,7 @@ public class Producto {
 	public void setPeso(int peso) {
 		this.peso = peso;
 	}
-	public String getTamaño() {
-		return tamaño;
-	}
-	public void setTamaño(String tamaño) {
-		this.tamaño = tamaño;
-	}
+
 	public String getFragil() {
 		return fragil;
 	}

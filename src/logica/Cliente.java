@@ -68,7 +68,6 @@ public class Cliente extends Persona {
 	} 
 	
 	HistorialEnvio he = new HistorialEnvio (0, null);
-	//Producto pr = new Producto (0, null, 0, null, null);
 	
 	Conexion conexion = new Conexion ();
 	Connection con = conexion.conectar(); 
@@ -138,13 +137,14 @@ public class Cliente extends Persona {
 	}
 	
 	 public boolean solicitarEnvio(Producto producto) {
-		    String sql = "INSERT INTO `producto `(`nombre_producto`, `fragilidad`, `peso`) VALUES (?,?,?,?)";
+		    String sql = "INSERT INTO `producto `(`nombre_producto`, `fragilidad`, `peso`, `id_divisa`) VALUES (?,?,?,?)";
 
 		    try {
 		        stmt = con.prepareStatement(sql);
 		        stmt.setString(1, producto.getNombre());
 		        stmt.setString(2, producto.getFragil());
 		        stmt.setLong(3, producto.getPeso());
+		        //stmt.setInt(4, id_divisa);
 		        System.out.println(sql);
 		        System.out.println(stmt);
 		        stmt.execute();
@@ -165,6 +165,11 @@ public class Cliente extends Persona {
 		}
 		
 	}
+	
+	
+	
+	/*
+	
 	public void elegirFecha(Envio envio) {
 		LocalDate fecha_envio = LocalDate.now();
 	       
@@ -190,7 +195,7 @@ public class Cliente extends Persona {
 			}
 	}
 
-
+*/
 	
 	
 }
