@@ -3,6 +3,7 @@ package interfaz;
 import javax.swing.JOptionPane;
 
 import logica.Cliente;
+import logica.Divisa;
 import logica.Encargado;
 import logica.InicioSesion;
 
@@ -12,7 +13,7 @@ public class PantallaEncargado implements InicioSesion{
 		Cliente cli = new Cliente ("", "", "", "");
 		
 		
-		String[] opEncargado = {"Asignar Contenedor","Generar envios","Ver Envios", "Eliminar clientes", "Salir"};
+		String[] opEncargado = {"Asignar Contenedor","Generar envios","Ver Envios", "Eliminar clientes","Ingresar nueva divisa" ,"Salir"};
 		
 		int opciones=JOptionPane.showOptionDialog(null,"Ingrese la opcion", null, 0, 0, null, opEncargado, opEncargado[0]);
 		
@@ -28,7 +29,20 @@ public class PantallaEncargado implements InicioSesion{
 			break;
 		case 3:
 			encargado.eliminarCliente(cli);
-			 
+			break;
+		case 4:
+			
+		
+			String tipo = JOptionPane.showInputDialog("Ingrese tipo divisa");
+			double coti = Double.parseDouble(JOptionPane.showInputDialog("iNGRESE COTIZACIOND"));
+			
+			Divisa divisa =  new Divisa(tipo, coti);
+			
+			divisa.ingresarDivisa(divisa);
+			break;
+		case 5:
+			JOptionPane.showMessageDialog(null, "Saliendo");
+			break;
 		}
 		
 		
