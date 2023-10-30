@@ -136,17 +136,16 @@ public class Cliente extends Persona {
 		
 	}
 	
-	 public boolean solicitarEnvio(Producto producto) {
-		    String sql = "INSERT INTO `producto `(`nombre_producto`, `fragilidad`, `peso`, `id_divisa`) VALUES (?,?,?,?)";
+	 public boolean solicitarEnvio(Producto producto, Divisa divisa) {
+		    String sql = "INSERT INTO `producto` (`nombre_producto`, `fragilidad`, `peso`, `id_divisa`) VALUES (?,?,?,?)";
 
 		    try {
 		        stmt = con.prepareStatement(sql);
 		        stmt.setString(1, producto.getNombre());
 		        stmt.setString(2, producto.getFragil());
 		        stmt.setLong(3, producto.getPeso());
-		        //stmt.setInt(4, id_divisa);
-		        System.out.println(sql);
-		        System.out.println(stmt);
+		        stmt.setInt(4, divisa.getId_divisa());
+		      
 		        stmt.execute();
 		        return true;
 		    } catch (Exception e) {
