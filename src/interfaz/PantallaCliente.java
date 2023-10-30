@@ -1,13 +1,9 @@
 package interfaz;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.Iterator;
+import java.util.LinkedList;
 
 import javax.swing.JOptionPane;
 
-import datos.Conexion;
 import logica.Cliente;
 import logica.Divisa;
 import logica.Envio;
@@ -23,27 +19,22 @@ public class PantallaCliente implements InicioSesion {
 		
 
 		String[] opCliente = { "Solicitar envio", "Ver informacion envios", "Salir" };
-		
-		Divisa divisa = new Divisa();
-		
-		System.out.println(divisa.mostrarDivisas());
 
-		int opciones = JOptionPane.showOptionDialog(null, "Ingrese la opcion", null, 0, 0, null, opCliente,
-				opCliente[0]);
+	        int opciones;
+	        
 		do {
 
+			opciones = JOptionPane.showOptionDialog(null, "Ingrese la opcion", null, 0, 0, null, opCliente,
+					opCliente[0]);
+			
 			switch (opciones) {
 			case 0:
 
-				boolean fragil;
-				String fragilidad = "fragil+";
+				String fragilidad = "";
 				String nombre = "";
 				int peso = 0;
 				boolean ver = false;
-
-				
-				
-				
+		
 
 				do {
 					try {
@@ -51,7 +42,7 @@ public class PantallaCliente implements InicioSesion {
 						if (nombre.isEmpty()) {
 							JOptionPane.showMessageDialog(null, "Nombre no ingresado correctamente");
 						} else {
-							JOptionPane.showMessageDialog(null, "Nombre ingresado correctamente");
+							//JOptionPane.showMessageDialog(null, "Nombre ingresado correctamente");
 							ver = true;
 						}
 					} catch (NullPointerException e) {
@@ -67,7 +58,7 @@ public class PantallaCliente implements InicioSesion {
 						if (peso < 1) {
 							JOptionPane.showMessageDialog(null, "Peso no ingresado correctamente");
 						} else {
-							JOptionPane.showMessageDialog(null, "Peso ingresado correctamente");
+							//JOptionPane.showMessageDialog(null, "Peso ingresado correctamente");
 							ver = true;
 						}
 					} catch (NumberFormatException e) {
@@ -75,20 +66,69 @@ public class PantallaCliente implements InicioSesion {
 					}
 				} while (!ver);
 
-				String[] op = { "Sí", "No" };
+				String[] op = { "FRAGIL", "NO FRAGIL" };
 
 				int seleccion = JOptionPane.showOptionDialog(null, "¿Es este producto frágil?", "Pregunta",
 						JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, op, op[0]);
 
-				fragil = (seleccion == JOptionPane.YES_OPTION);
+				switch (seleccion) {
+				case 0:
+					fragilidad = "FRAGIL";
+					break;
+				case 1:
+					fragilidad = "NO FRAGIL";
+					break;
+				default:
+					break;
+				}
 
 				/* validar info creacion producto */
+				
+				Divisa divisa = new Divisa();
+				 Divisa divisaSeleccionada = null;
+				
+				 System.out.println(divisa.mostrarDivisas());
+			       LinkedList<Divisa> divisas = divisa.mostrarDivisas();
+
+			        if (!divisas.isEmpty()) {
+			        	String[] opcionesDivisa = new String[divisas.size()];
+
+			            for (int i = 0; i < divisas.size(); i++) {
+			            	opcionesDivisa[i] = divisas.get(i).getTipo();
+			            }
+
+			            int seleccionada = JOptionPane.showOptionDialog(null,
+			                    "Selecciona una divisa:",
+			                    "Selección de Divisa",
+			                    JOptionPane.DEFAULT_OPTION,
+			                    JOptionPane.QUESTION_MESSAGE,
+			                    null,
+			                    opcionesDivisa,
+			                    opcionesDivisa[0]);
+
+			            if (seleccion >= 0) {
+			                divisaSeleccionada = divisas.get(seleccionada);
+			                JOptionPane.showMessageDialog(null,
+			                        "Has seleccionado la divisa: " + divisaSeleccionada.getTipo() +
+			                        "\nID: " + divisaSeleccionada.getId_divisa() +
+			                        "\nCotización: " + divisaSeleccionada.getCotizacion(),
+			                        "Divisa Seleccionada",
+			                        JOptionPane.INFORMATION_MESSAGE);
+			            }
+			        } else {
+			            JOptionPane.showMessageDialog(null, "No hay divisas disponibles.", "Error", JOptionPane.ERROR_MESSAGE);
+			        }
+				
 
 				Producto productoNuevo = new Producto(nombre, fragilidad, peso);
-
-				cliente.solicitarEnvio(productoNuevo);
+				
+				System.out.println(divisaSeleccionada.getId_divisa());
+				
+				System.out.println(cliente.solicitarEnvio(productoNuevo, divisaSeleccionada));
 
 				// cliente.solicitarEnvio(productoNuevo, divisaEligida);
+				
+				break;
 			case 1:
 				JOptionPane.showMessageDialog(null, "Informacion de los envios: ");
 				break;

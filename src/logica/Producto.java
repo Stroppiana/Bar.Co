@@ -7,6 +7,7 @@ public class Producto {
 	private String fragil;
 	
 	
+	
 	public Producto(String nombre, String fragil,int peso) {
 		super();
 		this.nombre = nombre;
@@ -46,5 +47,7 @@ public class Producto {
 	public void setFragil(String fragil) {
 		this.fragil = fragil;
 	}
+
+
 }
 
