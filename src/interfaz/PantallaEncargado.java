@@ -2,6 +2,7 @@ package interfaz;
 
 import java.util.LinkedList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 import logica.Cliente;
@@ -14,6 +15,7 @@ public class PantallaEncargado implements InicioSesion{
 	
 	public void MenuEncargado(Encargado encargado) {
 	    Cliente cli = new Cliente("", "", "", "");
+	    
 
 	    String[] opEncargado = {"Asignar carga contenedor", "Generar RUTA MARITIMA", "Asignar Contenedor a barco", "Generar envíos", "Ver Envíos", "Eliminar clientes", "Ingresar nueva divisa", "Salir"};
 
@@ -25,45 +27,85 @@ public class PantallaEncargado implements InicioSesion{
 	            break;
 	        case 1:
 	            JOptionPane.showMessageDialog(null, "Generar RUTA MARITIMA");
-	            
-	            
+
 	            Puerto puerto = new Puerto();
-	            Puerto puertoSeleccionada = null;
-				
-				 System.out.println(puerto.mostrarPuertos());
-			       LinkedList<Puerto> puertos = puerto.mostrarPuertos();
+	            Puerto origen = null;
+	            Puerto destino = null;
 
-			        if (!puertos.isEmpty()) {
-			        	String[] opcionesPuerto = new String[puertos.size()];
+	            System.out.println(puerto.mostrarPuertos());
+	            LinkedList<Puerto> puertos = puerto.mostrarPuertos();
 
-			            for (int i = 0; i < puertos.size(); i++) {
-			            	opcionesPuerto[i] = puertos.get(i).getNombrePuerto();
-			            }
+	            if (!puertos.isEmpty()) {
+	                String[] opcionesPuerto = new String[puertos.size()];
 
-			            int seleccionada = JOptionPane.showOptionDialog(null,
-			                    "Selecciona PUERTO ORIGEN:",
-			                    "Selección de ORIGEN",
-			                    JOptionPane.DEFAULT_OPTION,
-			                    JOptionPane.QUESTION_MESSAGE,
-			                    null,
-			                    opcionesPuerto,
-			                    opcionesPuerto[0]);
+	                for (int i = 0; i < puertos.size(); i++) {
+	                    opcionesPuerto[i] = puertos.get(i).getNombrePuerto();
+	                }
 
-			            if (seleccionada >= 0) {
-			            	puertoSeleccionada = puertos.get(seleccionada);
-			                JOptionPane.showMessageDialog(null,
-			                        "Has seleccionado PUERTO ORIGEN: " + puertoSeleccionada.getNombrePuerto() +
-			                        "\nID: " + puertoSeleccionada.getIdPuerto() +
-			                        "\nLATITUD: " + puertoSeleccionada.getLatitud() +
-			                        "\nLONGITUD: " + puertoSeleccionada.getLongitud() ,
-			                        "PUERTO ORIGEN",
-			                        JOptionPane.INFORMATION_MESSAGE);
-			            }
-			        } else {
-			            JOptionPane.showMessageDialog(null, "No hay puertos disponibles.", "Error", JOptionPane.ERROR_MESSAGE);
-			        }
+	                int seleccionadaOrigen = JOptionPane.showOptionDialog(null,
+	                        "Selecciona PUERTO DE ORIGEN:",
+	                        "Selección de ORIGEN",
+	                        JOptionPane.DEFAULT_OPTION,
+	                        JOptionPane.QUESTION_MESSAGE,
+	                        null,
+	                        opcionesPuerto,
+	                        opcionesPuerto[0]);
+
+	                if (seleccionadaOrigen >= 0) {
+	                    origen = puertos.get(seleccionadaOrigen);
+
+	                    int seleccionadaDestino = JOptionPane.showOptionDialog(null,
+	                            "Selecciona PUERTO DE DESTINO:",
+	                            "Selección de DESTINO",
+	                            JOptionPane.DEFAULT_OPTION,
+	                            JOptionPane.QUESTION_MESSAGE,
+	                            null,
+	                            opcionesPuerto,
+	                            opcionesPuerto[0]);
+
+	                    if (seleccionadaDestino >= 0) {
+	                        destino = puertos.get(seleccionadaDestino);
+
+	                        JOptionPane.showMessageDialog(null,
+	                                "Has seleccionado PUERTO DE ORIGEN: " + origen.getNombrePuerto() +
+	                                "\nID: " + origen.getIdPuerto() +
+	                                "\nLATITUD: " + origen.getLatitud() +
+	                                "\nLONGITUD: " + origen.getLongitud() +
+	                                "\n\nHas seleccionado PUERTO DE DESTINO: " + destino.getNombrePuerto() +
+	                                "\nID: " + destino.getIdPuerto() +
+	                                "\nLATITUD: " + destino.getLatitud() +
+	                                "\nLONGITUD: " + destino.getLongitud(),
+	                                "RUTA MARITIMA",
+	                                JOptionPane.INFORMATION_MESSAGE);
+	                    } else {
+	                        JOptionPane.showMessageDialog(null, "No has seleccionado un puerto de destino válido.", "Error", JOptionPane.ERROR_MESSAGE);
+	                    }
+	                } else {
+	                    JOptionPane.showMessageDialog(null, "No has seleccionado un puerto de origen válido.", "Error", JOptionPane.ERROR_MESSAGE);
+	                }
+	            } else {
+	                JOptionPane.showMessageDialog(null, "No hay puertos disponibles.", "Error", JOptionPane.ERROR_MESSAGE);
+	            }
 	            
 	            
+                String[] opcionesPuerto = new String[puertos.size()];
+
+
+	                for (int i = 0; i < puertos.size(); i++) {
+	                    opcionesPuerto[i] = puertos.get(i).getNombrePuerto();
+	                }
+
+							String seleccion1 = (String) JOptionPane.showInputDialog(null, "Elija el PUERTO ORIGEN",
+									"Ventana", JOptionPane.DEFAULT_OPTION,
+									null, opcionesPuerto,
+									opcionesPuerto[0]);
+							String seleccion2 = (String) JOptionPane.showInputDialog(null, "Elija el PUERTO DESTINO",
+									"Ventana", JOptionPane.DEFAULT_OPTION,
+									null, opcionesPuerto,
+									opcionesPuerto[0]);
+							
+							System.out.println(seleccion1 +  " - " + seleccion2);
+
 	            break;
 	        case 2:
 	            JOptionPane.showMessageDialog(null, "Asignar CONTENEDOR-BARCO");
