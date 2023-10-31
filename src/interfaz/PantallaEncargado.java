@@ -30,65 +30,9 @@ public class PantallaEncargado implements InicioSesion{
 	            JOptionPane.showMessageDialog(null, "Generar RUTA MARITIMA");
 
 	            Puerto puerto = new Puerto();
-	            //Puerto origen = null;
-	            //Puerto destino = null;
+	  
 	            LinkedList<Puerto> puertos = puerto.mostrarPuertos();
-	            /*
-	            System.out.println(puerto.mostrarPuertos());
-	        
 
-	            if (!puertos.isEmpty()) {
-	                String[] opcionesPuerto = new String[puertos.size()];
-
-	                for (int i = 0; i < puertos.size(); i++) {
-	                    opcionesPuerto[i] = puertos.get(i).getNombrePuerto();
-	                }
-
-	                int seleccionadaOrigen = JOptionPane.showOptionDialog(null,
-	                        "Selecciona PUERTO DE ORIGEN:",
-	                        "Selección de ORIGEN",
-	                        JOptionPane.DEFAULT_OPTION,
-	                        JOptionPane.QUESTION_MESSAGE,
-	                        null,
-	                        opcionesPuerto,
-	                        opcionesPuerto[0]);
-
-	                if (seleccionadaOrigen >= 0) {
-	                    origen = puertos.get(seleccionadaOrigen);
-
-	                    int seleccionadaDestino = JOptionPane.showOptionDialog(null,
-	                            "Selecciona PUERTO DE DESTINO:",
-	                            "Selección de DESTINO",
-	                            JOptionPane.DEFAULT_OPTION,
-	                            JOptionPane.QUESTION_MESSAGE,
-	                            null,
-	                            opcionesPuerto,
-	                            opcionesPuerto[0]);
-
-	                    if (seleccionadaDestino >= 0) {
-	                        destino = puertos.get(seleccionadaDestino);
-
-	                        JOptionPane.showMessageDialog(null,
-	                                "Has seleccionado PUERTO DE ORIGEN: " + origen.getNombrePuerto() +
-	                                "\nID: " + origen.getIdPuerto() +
-	                                "\nLATITUD: " + origen.getLatitud() +
-	                                "\nLONGITUD: " + origen.getLongitud() +
-	                                "\n\nHas seleccionado PUERTO DE DESTINO: " + destino.getNombrePuerto() +
-	                                "\nID: " + destino.getIdPuerto() +
-	                                "\nLATITUD: " + destino.getLatitud() +
-	                                "\nLONGITUD: " + destino.getLongitud(),
-	                                "RUTA MARITIMA",
-	                                JOptionPane.INFORMATION_MESSAGE);
-	                    } else {
-	                        JOptionPane.showMessageDialog(null, "No has seleccionado un puerto de destino válido.", "Error", JOptionPane.ERROR_MESSAGE);
-	                    }
-	                } else {
-	                    JOptionPane.showMessageDialog(null, "No has seleccionado un puerto de origen válido.", "Error", JOptionPane.ERROR_MESSAGE);
-	                }
-	            } else {
-	                JOptionPane.showMessageDialog(null, "No hay puertos disponibles.", "Error", JOptionPane.ERROR_MESSAGE);
-	            }
-	            */
 	            
                 String[] opcionesPuerto = new String[puertos.size()];
 
@@ -107,12 +51,29 @@ public class PantallaEncargado implements InicioSesion{
 									opcionesPuerto[0]);
 							
 							System.out.println(seleccion1 +  " - " + seleccion2);
+							
+							int origen, destino;
+							
+							origen  = puerto.seleccionPuerto(seleccion1);
+							destino = puerto.seleccionPuerto(seleccion2);
 	
-							int distancia = 0;
+							double distancia = 0;
 							
-							RutaMaritima rutaNueva = new RutaMaritima(seleccion1, seleccion2, distancia);
+						
+										
 							
-							System.out.println("RUTA MARITIMA " + 							rutaNueva.generarRutaMaritima());
+							
+							RutaMaritima rutaNueva = new RutaMaritima(origen, destino, distancia);
+							
+								if (rutaNueva.guardarDistanciaRuta(origen, destino)) {
+								
+									
+									distancia = rutaNueva.calcularDistancia(origen, origen, destino, destino);
+								}
+							
+							
+							
+							System.out.println("RUTA MARITIMA " + rutaNueva.generarRutaMaritima());
 							
 							//probando
 
