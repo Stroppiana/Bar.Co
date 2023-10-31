@@ -10,6 +10,7 @@ import logica.Divisa;
 import logica.Encargado;
 import logica.InicioSesion;
 import logica.Puerto;
+import logica.RutaMaritima;
 
 public class PantallaEncargado implements InicioSesion{
 	
@@ -106,6 +107,8 @@ public class PantallaEncargado implements InicioSesion{
 							
 							System.out.println(seleccion1 +  " - " + seleccion2);
 	
+							
+							RutaMaritima rutaNueva = new RutaMaritima();
 							
 							//probando
 
