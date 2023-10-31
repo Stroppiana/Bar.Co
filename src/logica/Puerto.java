@@ -15,7 +15,6 @@ public class Puerto {
 	private double longitud;
 
 	
-	
 	public Puerto(int idPuerto, String nombrePuerto, double latitud, double longitud) {
 		super();
 		this.idPuerto = idPuerto;
@@ -99,6 +98,34 @@ public class Puerto {
 	
 	} 
 	
+	
+	public int seleccionPuerto(String nombrePuerto) {
+		
+		int idPuerto = -1;
+
+		String sql = "SELECT `id_puerto` FROM `puerto` WHERE  `nombre_puerto` = ?";
+		
+		try {
+			
+			PreparedStatement stmt = con.prepareStatement(sql);
+			
+			stmt.setString(1, nombrePuerto);
+			
+			ResultSet resultado = stmt.executeQuery();
+			
+			if (resultado.next()) {
+				
+				idPuerto = resultado.getInt("id_puerto");
+			}
+			
+		}catch (Exception e) {
+	        e.printStackTrace();
+	        System.out.println("Error");
+		}
+		
+		
+		return idPuerto;
+	}
 	
 	
 	
