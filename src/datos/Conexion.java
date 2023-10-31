@@ -16,8 +16,8 @@ public class Conexion {
 			Class.forName("com.mysql.jdbc.Driver");
 			
 			
-			//con = DriverManager.getConnection("jdbc:mysql://localhost:3463/barco","root","");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/barco","root","");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3463/barco","root","");
+			//con = DriverManager.getConnection("jdbc:mysql://localhost:3306/barco","root","");
 
 			//JOptionPane.showMessageDialog(null, "se conecto");
 			
