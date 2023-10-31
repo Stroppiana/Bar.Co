@@ -82,9 +82,8 @@ public class PantallaCliente implements InicioSesion {
 					break;
 				}
 
-				/* validar info creacion producto */
 				
-				Divisa divisa = new Divisa();
+				 Divisa divisa = new Divisa();
 				 Divisa divisaSeleccionada = null;
 				
 				 System.out.println(divisa.mostrarDivisas());
@@ -106,7 +105,7 @@ public class PantallaCliente implements InicioSesion {
 			                    opcionesDivisa,
 			                    opcionesDivisa[0]);
 
-			            if (seleccion >= 0) {
+			            if (seleccionada >= 0) {
 			                divisaSeleccionada = divisas.get(seleccionada);
 			                JOptionPane.showMessageDialog(null,
 			                        "Has seleccionado la divisa: " + divisaSeleccionada.getTipo() +
