@@ -18,7 +18,7 @@ public class PantallaEncargado implements InicioSesion{
 	    Cliente cli = new Cliente("", "", "", "");
 	    
 
-	    String[] opEncargado = {"Asignar carga contenedor", "Generar RUTA MARITIMA", "Asignar Contenedor a barco", "Generar envíos", "Ver Envíos", "Eliminar clientes", "Ingresar nueva divisa", "Salir"};
+	    String[] opEncargado = {"Asignar carga contenedor", "Generar RUTA MARITIMA", "Asignar Contenedor a barco", "Generar envíos", "Ver Envíos", "Eliminar clientes", "Mostrar clientes","Ingresar nueva divisa", "Salir"};
 
 	    int opciones = JOptionPane.showOptionDialog(null, "Ingrese la opción", null, 0, 0, null, opEncargado, opEncargado[0]);
 
@@ -30,11 +30,12 @@ public class PantallaEncargado implements InicioSesion{
 	            JOptionPane.showMessageDialog(null, "Generar RUTA MARITIMA");
 
 	            Puerto puerto = new Puerto();
-	            Puerto origen = null;
-	            Puerto destino = null;
-
-	            System.out.println(puerto.mostrarPuertos());
+	            //Puerto origen = null;
+	            //Puerto destino = null;
 	            LinkedList<Puerto> puertos = puerto.mostrarPuertos();
+	            /*
+	            System.out.println(puerto.mostrarPuertos());
+	        
 
 	            if (!puertos.isEmpty()) {
 	                String[] opcionesPuerto = new String[puertos.size()];
@@ -87,7 +88,7 @@ public class PantallaEncargado implements InicioSesion{
 	            } else {
 	                JOptionPane.showMessageDialog(null, "No hay puertos disponibles.", "Error", JOptionPane.ERROR_MESSAGE);
 	            }
-	            
+	            */
 	            
                 String[] opcionesPuerto = new String[puertos.size()];
 
@@ -107,8 +108,11 @@ public class PantallaEncargado implements InicioSesion{
 							
 							System.out.println(seleccion1 +  " - " + seleccion2);
 	
+							int distancia = 0;
 							
-							RutaMaritima rutaNueva = new RutaMaritima();
+							RutaMaritima rutaNueva = new RutaMaritima(seleccion1, seleccion2, distancia);
+							
+							System.out.println("RUTA MARITIMA " + 							rutaNueva.generarRutaMaritima());
 							
 							//probando
 
@@ -128,7 +132,11 @@ public class PantallaEncargado implements InicioSesion{
 	        case 5:
 	            encargado.eliminarCliente(cli);
 	            break;
+	            
 	        case 6:
+	        	encargado.MostrarClientes();
+	        	break;
+	        case 7:
 	            String tipo = JOptionPane.showInputDialog("Ingrese tipo divisa");
 	            double coti = Double.parseDouble(JOptionPane.showInputDialog("Ingrese la cotización"));
 
@@ -136,7 +144,7 @@ public class PantallaEncargado implements InicioSesion{
 
 	            divisa.ingresarDivisa(divisa);
 	            break;
-	        case 7:
+	        case 8:
 	            JOptionPane.showMessageDialog(null, "Saliendo");
 	            break;
 	        default:

@@ -17,9 +17,8 @@ public class RutaMaritima {
 		
 	}
 	
-	public RutaMaritima(int idRuta, String origen, String destino, int distancia) {
+	public RutaMaritima(String origen, String destino, int distancia) {
 		super();
-		this.idRuta = idRuta;
 		this.origen = origen;
 		this.destino = destino;
 		this.distancia = distancia;
@@ -62,7 +61,7 @@ public class RutaMaritima {
 	
 	public boolean generarRutaMaritima () {
 		
-		String sql = "INSERT INTO `ruta_maritima`( `origen`, `destino`, `distancia`)  VALUES (?,?,?)";
+		String sql = "INSERT INTO `ruta_maritima`(`origen`, `destino`, `distancia_ruta`)  VALUES (?,?,?)";
 		
 		System.out.println(sql);
 		System.out.println(stmt);
