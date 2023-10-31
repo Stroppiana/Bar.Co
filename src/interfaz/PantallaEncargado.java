@@ -105,6 +105,9 @@ public class PantallaEncargado implements InicioSesion{
 									opcionesPuerto[0]);
 							
 							System.out.println(seleccion1 +  " - " + seleccion2);
+	
+							
+							//probando
 
 	            break;
 	        case 2:
