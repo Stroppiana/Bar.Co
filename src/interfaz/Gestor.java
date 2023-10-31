@@ -63,16 +63,7 @@ public class Gestor implements InicioSesion {
 			usuario = JOptionPane.showInputDialog("Ingrese su nombre de usuario (el nombre de usuario es su mail)");
 			
 			cliente.setMail(usuario);
-			/*
-		    usuariorepetido = false;
-		    for (int i = 0; i < cliente.getClientes().size(); i++) {
-		        if (usuario.equalsIgnoreCase(cliente.getClientes().get(i).getMail())) {
-		        	usuariorepetido = true;
-		            break;
-		        }
-		        
-		    }
-		    */
+
 		    if (encargado.sesionExistente(cliente)) {
 				//JOptionPane.showMessageDialog(null, "Usuario repetido, ingrese otro nombre de usuario");
 				
@@ -124,37 +115,24 @@ public class Gestor implements InicioSesion {
 			cliente.setMail(usuario);
 			cliente.setClave(clave);
 			
-			if (valida.iniciarSesionClave(usuario, clave) && valida.validarMail(usuario)) {
+			encargado.setMail(usuario);
+			encargado.setClave(clave);
+			
+			capitan.setMail(usuario);
+			capitan.setClave(clave);
+			
+			if (valida.iniciarSesionClave(usuario, clave) && valida.validarMail(usuario) && encargado.inicioSesionEncargado() ) {
 				
-				cliente.inicioSsesionCliente();
+				
+			}else if (valida.iniciarSesionClave(usuario, clave) && valida.validarMail(usuario) && cliente.inicioSsesionCliente()) {
+				
+
+			}else if (valida.iniciarSesionClave(usuario, clave) && valida.validarMail(usuario) && capitan.inicioSesionCapitan()) {
+				
 			}else {
+				JOptionPane.showMessageDialog(null, "Error en el inicio de sesion");
+			}
 
-				JOptionPane.showMessageDialog(null, "Sesion no existente");
-			}
-				/*
-			for (int i = 0; i < cliente.getClientes().size(); i++) {
-				if (usuario.equalsIgnoreCase(cliente.getClientes().get(i).getMail()) && clave.equalsIgnoreCase(cliente.getClientes().get(i).getClave())) {
-					//pc.MenuCliente(cliente, hist, prod);
-					//Cliente nuevoCliente = new Cliente ("ivan", "ffff", "ivanbilkis@gmail.com", "111");
-
-			}
-				
-			}
-			for (int j = 0; j < encargado.getEncargados().size() ; j++) {
-				
-				if (usuario.equalsIgnoreCase(encargado.getEncargados().get(j).getMail()) && clave.equalsIgnoreCase(encargado.getEncargados().get(j).getClave())) {
-					pe.MenuEncargado(encargado);
-				}
-			}
-			
-			
-			for (int h = 0; h < capitan.getCapitanes().size(); h++) {
-				if (usuario.equalsIgnoreCase(capitan.getCapitanes().get(h).getMail() )&& clave.equalsIgnoreCase(capitan.getCapitanes().get(h).getClave())) {
-					pca.MenuCapitan(capitan);
-				}
-			}
-			*/
-			
 		}
 			
 		} while (opciones2!=2);

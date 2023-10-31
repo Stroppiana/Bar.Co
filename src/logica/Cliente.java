@@ -1,12 +1,9 @@
 package logica;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 
 import javax.swing.JOptionPane;
@@ -25,7 +22,13 @@ public class Cliente extends Persona {
 	
 
 	
-	public int getIdCliente() {
+	public Cliente(String nombre, String apellido, String mail, String clave, int idCliente) {
+		super(nombre, apellido, mail, clave);
+		this.idCliente = idCliente;
+		this.clientes = clientes;
+	}
+
+	public int getIdCliente() { 
 		return idCliente;
 	}
 
@@ -41,6 +44,8 @@ public class Cliente extends Persona {
 		this.clientes = clientes;
 	}
 
+	
+	
 
 
 	public Cliente(String nombre, String apellido, String mail, String clave) {
@@ -68,6 +73,7 @@ public class Cliente extends Persona {
 	} 
 	
 	HistorialEnvio he = new HistorialEnvio (0, null);
+	//Producto pr = new Producto (0, null, 0, null, null);
 	
 	Conexion conexion = new Conexion ();
 	Connection con = conexion.conectar(); 

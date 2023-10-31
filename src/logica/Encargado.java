@@ -2,6 +2,7 @@ package logica;
 import javax.swing.JOptionPane;
 
 import datos.Conexion;
+import interfaz.PantallaEncargado;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -80,6 +81,37 @@ public class Encargado extends Persona{
 		
 	}
 	*/
+	
+	public boolean inicioSesionEncargado () {
+		PantallaEncargado pe = new PantallaEncargado ();
+		
+		String sql= "SELECT * FROM `encargado` WHERE usuario=? AND clave=?";
+		
+		try {
+			   stmt = con.prepareStatement(sql);
+			    stmt.setString(1, this.getMail());
+			    stmt.setString(2, this.getClave());
+			    
+			    
+			    ResultSet resultados = stmt.executeQuery();
+
+
+			    if (resultados.next()==true) {
+			    	pe.MenuEncargado(this);
+
+			        return true;
+			        
+			    } else {
+			        return false;
+			    }
+		} catch (Exception e) {
+			 e.printStackTrace();
+			    JOptionPane.showMessageDialog(null, "Error en el inicio de sesión");
+			    return false;
+		}
+		
+		
+	}
 	public boolean eliminarCliente (Cliente cliente) {
 		String sql = "DELETE FROM `cliente` WHERE id_cliente=?";
 		int cli;
