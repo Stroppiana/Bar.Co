@@ -109,8 +109,10 @@ public class PantallaEncargado implements InicioSesion {
 			destino = puerto.seleccionPuerto(seleccion2);
 
 			double distancia = 0;
+			
+			String tiempoViaje = "10 DIAS DE VIAJE";
 
-			RutaMaritima rutaNueva = new RutaMaritima(origen, destino, distancia);
+			RutaMaritima rutaNueva = new RutaMaritima(origen, destino, distancia, tiempoViaje);
 
 			if (rutaNueva.guardarDistanciaRuta(origen, destino)) {
 
