@@ -1,40 +1,134 @@
 package logica;
 
-import javax.swing.JOptionPane;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.LinkedList;
+
+import datos.Conexion;
+
+//import javax.swing.JOptionPane;
 
 public class Contenedor {
+	
 	private int idContenedor;
-	private int capacidad;
-	private boolean disponibilidad;
-	public Contenedor(int idContenedor, int capacidad, boolean disponibilidad) {
+	private int toneladas;
+	//private boolean disponibilidad;
+	
+	public Contenedor(int idContenedor,int toneladas) {
 		super();
 		this.idContenedor = idContenedor;
-		this.capacidad = capacidad;
-		this.disponibilidad = disponibilidad;
+		this.toneladas = toneladas;
 	}
-	@Override
-	public String toString() {
-		return "Contenedor [idContenedor=" + idContenedor + ", capacidad=" + capacidad + ", disponibilidad="
-				+ disponibilidad + "]";
+	
+	public Contenedor() {
+		
 	}
+	
 	public int getIdContenedor() {
 		return idContenedor;
 	}
+
 	public void setIdContenedor(int idContenedor) {
 		this.idContenedor = idContenedor;
 	}
-	public int getCapacidad() {
-		return capacidad;
+	public int getToneladas() {
+		return toneladas;
 	}
-	public void setCapacidad(int capacidad) {
-		this.capacidad = capacidad;
+	public void setToneladas(int toneladas) {
+		this.toneladas = toneladas;
 	}
-	public boolean isDisponibilidad() {
-		return disponibilidad;
+	
+	Conexion conexion = new Conexion ();
+	Connection con = conexion.conectar(); 
+	PreparedStatement stmt;
+	
+	
+	public boolean asignarProducto(int idContenedor, int idProducto) {
+		
+		//instruccion de CONTENEDOR_PRODUCTO
+		
+		String sql = "INSERT INTO `contenedor_producto`(`id_contenedor`, `id_producto`) VALUES (?,?)";
+		
+		try {
+			
+			stmt = con.prepareStatement(sql);
+			stmt.setInt(1, idContenedor);
+			stmt.setInt(2, idProducto);
+			stmt.executeUpdate();
+			return true;
+			
+		} catch (Exception e) {
+			System.out.println(e);
+			return false;
+		}
+		
+			
 	}
-	public void setDisponibilidad(boolean disponibilidad) {
-		this.disponibilidad = disponibilidad;
+	
+	
+	public LinkedList<Contenedor> mostrarContenedores() {
+		String sql = "SELECT * FROM contenedor";
+		
+		LinkedList<Contenedor> contenedores = new LinkedList<>();
+	    
+	    try {
+	        PreparedStatement stmt = con.prepareStatement(sql);
+
+	        ResultSet resultados = stmt.executeQuery();
+	        
+	        while (resultados.next()) {
+	            int id_contenedor = resultados.getInt("id_contenedor");
+	            int	toneladas = resultados.getInt("toneladas");
+	
+
+	            Contenedor contenedor = new Contenedor(id_contenedor, toneladas);
+	            
+	            contenedores.add(contenedor);
+
+	            System.out.println("ID: " + id_contenedor + ", TONELADAS ACT: " + toneladas);
+	        }
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        System.out.println("Error");
+	    }
+	    
+	    return contenedores;
+	
+	} 
+	
+	
+	public int seleccionContenedor(int id) {
+		
+		int idContenedor = -1;
+
+		String sql = "SELECT `id_contenedor` FROM `contenedor` WHERE  `id_contenedor` = ?";
+		
+		try {
+			
+			PreparedStatement stmt = con.prepareStatement(sql);
+			
+			stmt.setInt(1, id);
+			
+			ResultSet resultado = stmt.executeQuery();
+			
+			if (resultado.next()) {
+				
+				idContenedor = resultado.getInt("id_contenedor");
+			}
+			
+		}catch (Exception e) {
+	        e.printStackTrace();
+	        System.out.println("Error");
+		}
+		
+		
+		return idContenedor;
 	}
+	
+	
+	/*
 	
 	public void Contener(Producto producto) {
 		if (producto.getPeso()<this.capacidad) {
@@ -43,4 +137,8 @@ public class Contenedor {
 			JOptionPane.showMessageDialog(null, "Su producto no entra en el contenedor");
 		}
 	}
+	*/
+	
+	
+	
 }

@@ -28,26 +28,59 @@ public class PantallaEncargado implements InicioSesion {
 
 		switch (opciones) {
 		case 0:
+			
 			JOptionPane.showMessageDialog(null, "Asignar CARGA-CONTENEDOR");
 
-			Producto producto = null;
-			Contenedor contenedor = new Contenedor(opciones, opciones, false);
+			Producto producto = new Producto();
+			
+			LinkedList<Producto> productos = producto.mostrarProductos();
+			
+			if (!productos.isEmpty()) {
 
-			try {
-				if (producto.getPeso() < contenedor.getCapacidad()) {
-					JOptionPane.showMessageDialog(null, "El producto podrá ser trasladado dentro de un contenedor");
+				String[] opcionesProductos = new String[productos.size()];
 
-				} else if (producto.getFragil().equalsIgnoreCase("si")) {
-					JOptionPane.showMessageDialog(null, "El producto deber tener protección");
-
-				} else {
-					JOptionPane.showMessageDialog(null,
-							"El producto no entra en el contenedor. Debe reducir el peso del mismo");
+				for (int i = 0; i < productos.size(); i++) {
+					opcionesProductos[i] = productos.get(i).getNombre();
 				}
 
-			} catch (Exception e) {
-				// TODO: handle exception
+				String p1 = (String) JOptionPane.showInputDialog(null, "Elija el PUERTO ORIGEN", "Ventana",
+						JOptionPane.DEFAULT_OPTION, null, opcionesProductos, opcionesProductos[0]);
+				
+				System.out.println(p1);
+				
+				int idProducto = producto.seleccionProducto(p1);
+								
+				Contenedor contenedor = new Contenedor();
+
+				LinkedList<Contenedor> contenedores = contenedor.mostrarContenedores();
+				String[] opcionesContenedor = new String[contenedores.size()];
+
+				for (int i = 0; i < contenedores.size(); i++) {
+					opcionesContenedor[i] = String.valueOf(contenedores.get(i).getIdContenedor()); // Cambiamos el nombre por el ID
+				}
+
+				String contenedorID = (String) JOptionPane.showInputDialog(null, "Elija el ID del CONTENEDOR", "Ventana",
+				        JOptionPane.DEFAULT_OPTION, null, opcionesContenedor, opcionesContenedor[0]);
+
+				// Ahora, seleccion1 contendrá el ID del puerto seleccionado como una cadena de texto
+				int idContenedor = Integer.parseInt(contenedorID); // Convierte la cadena en un entero
+
+				
+		
+				
+				if (contenedor.asignarProducto(idContenedor, idProducto) == true) {
+					JOptionPane.showMessageDialog(null, "CONTENEDOR Y PRODUCTO ALMACENADO");
+				}
+				
+				
+			}else {
+				JOptionPane.showMessageDialog(null, "LISTA PRODUCTOS VACIA");
 			}
+			
+			
+			
+			
+	
 
 			break;
 		case 1:

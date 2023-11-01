@@ -179,24 +179,9 @@ public class Encargado extends Persona {
 	}
 
 	public void asignarContenedor(Producto producto, Contenedor contenedor) {
-		String sql = "SELECT * FROM `producto` WHERE peso=?";
+		
+		
 
-		try {
-			if (producto.getPeso() < contenedor.getCapacidad()) {
-				JOptionPane.showMessageDialog(null, "El producto podrá ser trasladado dentro de un contenedor");
-
-			} else if (producto.getFragil().equalsIgnoreCase("si")) {
-				JOptionPane.showMessageDialog(null, "El producto deber tener protección");
-
-			} else {
-				JOptionPane.showMessageDialog(null,
-						"El producto no entra en el contenedor. Debe reducir el peso del mismo");
-			}
-
-		} catch (Exception e) {
-			// TODO: handle exception
-
-		}
 	}
 	
 	
