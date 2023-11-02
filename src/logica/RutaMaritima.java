@@ -13,16 +13,18 @@ public class RutaMaritima {
 	private  int origen;
 	private int destino;
 	private double distancia;
+	private String tiempoViaje;
 	
 	public RutaMaritima() {
 		
 	}
 	
-	public RutaMaritima(int origen, int destino, double distancia) {
+	public RutaMaritima(int origen, int destino, double distancia, String tiempoViaje) {
 		super();
 		this.origen = origen;
 		this.destino = destino;
 		this.distancia = distancia;
+		this.tiempoViaje = tiempoViaje;
 	}
 	public int getIdRuta() {
 		return idRuta;
@@ -54,6 +56,17 @@ public class RutaMaritima {
 	public void setDestino(int destino) {
 		this.destino = destino;
 	}
+	
+	
+	
+
+	public String getTiempoViaje() {
+		return tiempoViaje;
+	}
+
+	public void setTiempoViaje(String tiempoViaje) {
+		this.tiempoViaje = tiempoViaje;
+	}
 
 	@Override
 	public String toString() {
@@ -68,7 +81,7 @@ public class RutaMaritima {
 	
 	public boolean generarRutaMaritima () {
 		
-		String sql = "INSERT INTO `ruta_maritima`(`origen`, `destino`, `distancia_ruta`)  VALUES (?,?,?)";
+		String sql = "INSERT INTO `ruta_maritima`(`origen`, `destino`, `distancia_ruta`, `tiempo_viaje`)  VALUES (?,?,?,?)";
 		
 		System.out.println(sql);
 		System.out.println(stmt);
@@ -79,6 +92,7 @@ public class RutaMaritima {
 			stmt.setInt(1, this.getOrigen());
 			stmt.setInt(2, this.getDestino());
 			stmt.setDouble(3, this.getDistancia());
+			stmt.setString(4, this.getTiempoViaje());
 			stmt.executeUpdate();
 			return true;
 			
