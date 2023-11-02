@@ -14,8 +14,6 @@ import logica.Producto;
 public class PantallaCliente implements InicioSesion {
 
 	public void MenuCliente(Cliente cliente, HistorialEnvio envio) {
-
-		JOptionPane.showMessageDialog(null, "ddd");
 		
 
 		String[] opCliente = { "Solicitar envio", "Ver informacion envios", "Salir" };

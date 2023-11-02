@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
+import logica.Barco;
 import logica.Cliente;
 import logica.Contenedor;
 import logica.Divisa;
@@ -17,13 +18,21 @@ import logica.RutaMaritima;
 public class PantallaEncargado implements InicioSesion {
 
 	public void MenuEncargado(Encargado encargado) {
-		Cliente cli = new Cliente("", "", "", "");
+		Cliente cli = new Cliente();
 
-		String[] opEncargado = { "Asignar carga contenedor", "Generar RUTA MARITIMA", "Asignar Contenedor a barco",
-				"Generar envíos", "Ver Envíos", "Eliminar clientes", "Mostrar clientes", "Ingresar nueva divisa",
+		String[] opEncargado = { "CARGA-CONTENEDOR", "RUTA MARITIMA", "BARCO" ,"CONTENEDOR-BARCO",
+				"GENERAR ENVIO", "Ver Envíos", "Eliminar clientes", "Mostrar clientes", "Ingresar nueva divisa",
 				"Salir" };
+		
+		int opciones;
+		
+		Barco barco = new Barco();
 
-		int opciones = JOptionPane.showOptionDialog(null, "Ingrese la opción", null, 0, 0, null, opEncargado,
+		
+		do {
+			
+
+			opciones = JOptionPane.showOptionDialog(null, "Ingrese la opción", null, 0, 0, null, opEncargado,
 				opEncargado[0]);
 
 		switch (opciones) {
@@ -43,7 +52,7 @@ public class PantallaEncargado implements InicioSesion {
 					opcionesProductos[i] = productos.get(i).getNombre();
 				}
 
-				String p1 = (String) JOptionPane.showInputDialog(null, "Elija el PUERTO ORIGEN", "Ventana",
+				String p1 = (String) JOptionPane.showInputDialog(null, "Elija el PRODUCTO", "Ventana",
 						JOptionPane.DEFAULT_OPTION, null, opcionesProductos, opcionesProductos[0]);
 				
 				System.out.println(p1);
@@ -56,7 +65,7 @@ public class PantallaEncargado implements InicioSesion {
 				String[] opcionesContenedor = new String[contenedores.size()];
 
 				for (int i = 0; i < contenedores.size(); i++) {
-					opcionesContenedor[i] = String.valueOf(contenedores.get(i).getIdContenedor()); // Cambiamos el nombre por el ID
+					opcionesContenedor[i] = String.valueOf(contenedores.get(i).getIdContenedor());
 				}
 
 				String contenedorID = (String) JOptionPane.showInputDialog(null, "Elija el ID del CONTENEDOR", "Ventana",
@@ -78,9 +87,6 @@ public class PantallaEncargado implements InicioSesion {
 			}
 			
 			
-			
-			
-	
 
 			break;
 		case 1:
@@ -110,10 +116,11 @@ public class PantallaEncargado implements InicioSesion {
 
 			double distancia = 0;
 			
-			String tiempoViaje = "10 DIAS DE VIAJE";
+			String tiempoViaje = JOptionPane.showInputDialog("INGRESE CANTIDAD DIAS DE VIAJE");
 
 			RutaMaritima rutaNueva = new RutaMaritima(origen, destino, distancia, tiempoViaje);
 
+			
 			if (rutaNueva.guardarDistanciaRuta(origen, destino)) {
 
 				distancia = rutaNueva.calcularDistancia(origen, origen, destino, destino);
@@ -121,29 +128,101 @@ public class PantallaEncargado implements InicioSesion {
 
 			System.out.println("RUTA MARITIMA " + rutaNueva.generarRutaMaritima());
 
-			// probando
 
 			break;
 		case 2:
-			JOptionPane.showMessageDialog(null, "Asignar CONTENEDOR-BARCO");
-			// Aquí puedes agregar el código para asignar contenedores a barcos.
+			
+			JOptionPane.showMessageDialog(null, "BARCO A REALIZAR ENVIO");		
+			
+			try {
+				
+
+				int combustible = Integer.parseInt(JOptionPane.showInputDialog("INGRESE EL COMBUSTIBLE DEL BARCO"));
+				
+				int capacidad = Integer.parseInt(JOptionPane.showInputDialog("INGRESE LA CAPACIDAD DEL BARCO"));
+				
+				if (barco.crearBarco(combustible, capacidad, 1, 2)) {
+					System.out.println("BARCO CREADO");
+				}
+				
+				
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, "ERROR DE INGRESO");
+			}
+			
+		
 			break;
 		case 3:
-			JOptionPane.showMessageDialog(null, "Generar envíos");
-			// Aquí puedes agregar el código para generar envíos.
+			JOptionPane.showMessageDialog(null, "Asignar CONTENEDOR-BARCO");
+			
+			
+			Contenedor contenedor = new Contenedor();
+			
+			LinkedList<Contenedor> contenedores = contenedor.mostrarContenedores();
+			
+			if (!contenedores.isEmpty()) {
+
+				String[] opcionContenedores = new String[contenedores.size()];
+
+				for (int i = 0; i < contenedores.size(); i++) {
+					opcionContenedores[i] =String.valueOf(contenedores.get(i).getIdContenedor());
+				}
+
+				String c1 = (String) JOptionPane.showInputDialog(null, "Elija el CONTENEDOR", "Ventana",
+						JOptionPane.DEFAULT_OPTION, null, opcionContenedores, opcionContenedores[0]);
+				
+				System.out.println(c1);
+				
+				int idContenedor = Integer.parseInt(c1);
+				
+				contenedor.seleccionContenedor(idContenedor);
+								
+
+				LinkedList<Barco> barcos = barco.mostrarBarcos();
+				String[] opcionesBarcos = new String[barcos.size()];
+
+				for (int i = 0; i < contenedores.size(); i++) {
+					opcionesBarcos[i] = String.valueOf(contenedores.get(i).getIdContenedor()); // Cambiamos el nombre por el ID
+				}
+
+				String b1 = (String) JOptionPane.showInputDialog(null, "Elija el ID del BARCO", "Ventana",
+				        JOptionPane.DEFAULT_OPTION, null, opcionesBarcos, opcionesBarcos[0]);
+
+				// Ahora, seleccion1 contendrá el ID del puerto seleccionado como una cadena de texto
+				int idBarco = Integer.parseInt(b1); // Convierte la cadena en un entero
+				
+		
+				/*
+				if (barco.asignarContenedor(idContenedor, idBarco) == true) {
+					JOptionPane.showMessageDialog(null, "BARCO Y CONTENEDOR ALMACENADO");
+				}
+				*/
+				
+			}else {
+				JOptionPane.showMessageDialog(null, "LISTA VACIA");
+			}
+			
+			
+			
 			break;
 		case 4:
-			JOptionPane.showMessageDialog(null, "Ver Envíos");
-			// Aquí puedes agregar el código para ver los envíos.
+			JOptionPane.showMessageDialog(null, "Generar envíos");
+			
 			break;
 		case 5:
-			encargado.eliminarCliente(cli);
+			JOptionPane.showMessageDialog(null, "Ver Envíos");
+		
 			break;
 
 		case 6:
-			encargado.MostrarClientes();
+			encargado.eliminarCliente(cli);
+			
 			break;
 		case 7:
+			
+			JOptionPane.showMessageDialog(null, "LISTA CLIENTES \n " + 	encargado.MostrarClientes());
+			break;
+		case 8:
 			String tipo = JOptionPane.showInputDialog("Ingrese tipo divisa");
 			double coti = Double.parseDouble(JOptionPane.showInputDialog("Ingrese la cotización"));
 
@@ -151,13 +230,16 @@ public class PantallaEncargado implements InicioSesion {
 
 			divisa.ingresarDivisa(divisa);
 			break;
-		case 8:
+		case 9:
 			JOptionPane.showMessageDialog(null, "Saliendo");
 			break;
 		default:
 			JOptionPane.showMessageDialog(null, "Opción no válida", "Error", JOptionPane.ERROR_MESSAGE);
 			break;
 		}
+		
+		} while (opciones != 9);
+		
 	}
 
 }

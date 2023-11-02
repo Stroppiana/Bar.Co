@@ -10,23 +10,32 @@ import javax.swing.JOptionPane;
 
 import datos.Conexion;
 import interfaz.PantallaCliente;
-import java.util.concurrent.atomic.AtomicInteger;
+//import java.util.concurrent.atomic.AtomicInteger;
 
 public class Cliente extends Persona {
 	
 	
-	private static final AtomicInteger indice = new AtomicInteger(0);
+	//private static final AtomicInteger indice = new AtomicInteger(0);
 	
 	private int idCliente;
 	private LinkedList <Cliente> clientes = new LinkedList <>();
 	
 
 	
-	public Cliente(String nombre, String apellido, String mail, String clave, int idCliente) {
+	public Cliente(int idCliente,String nombre, String apellido, String mail, String clave) {
 		super(nombre, apellido, mail, clave);
 		this.idCliente = idCliente;
-		this.clientes = clientes;
 	}
+	
+	public Cliente(String nombre, String apellido, String mail, String clave) {
+		super(nombre, apellido, mail, clave);
+	}
+	
+	
+	public Cliente() {
+		
+	}
+	
 
 	public int getIdCliente() { 
 		return idCliente;
@@ -35,10 +44,12 @@ public class Cliente extends Persona {
 	public void setIdCliente(int idCliente) {
 		this.idCliente = idCliente;
 	}
+	
 
 	public LinkedList<Cliente> getClientes() {
 		return clientes;
 	}
+
 
 	public void setClientes(LinkedList<Cliente> clientes) {
 		this.clientes = clientes;
@@ -47,31 +58,14 @@ public class Cliente extends Persona {
 	
 	
 
-
-	public Cliente(String nombre, String apellido, String mail, String clave) {
-		super(nombre, apellido, mail, clave);
-		this.idCliente = idCliente;
-		this.clientes = clientes;
-		
-		
-	}
-	String h;
 	@Override
 	public String toString() {
-		/*StringBuilder sb = new StringBuilder();
-		
-		for (int i = 0; i < this.getClientes().size(); i++) {
-			
-			 sb.append("Cliente" +this.getClientes().get(i).getIdCliente() +": Nombre:" + this.getClientes().get(i).getNombre()+ 
-					 " Apellido:"+ this.getClientes().get(i).getApellido() +" Nombre de usuario:" + this.getClientes().get(i).getMail() +"\n");
-		}
-		return sb.toString();
-	*/
-		//porque estan las variables desacomocdadas?
-		
-		return "Cliente:"+ " [Id:" + this.getNombre()+ " Nombre:"+ this.getApellido() +" Apellido:" + this.getMail() + " Nombre de usuario:" +this.getClave() +"]\n";
-	} 
-	
+		return "Cliente [idCliente=" + idCliente + ", toString()=" + super.toString() + "]";
+	}
+
+
+
+
 	HistorialEnvio he = new HistorialEnvio (0, null);
 	//Producto pr = new Producto (0, null, 0, null, null);
 	
@@ -81,7 +75,6 @@ public class Cliente extends Persona {
 	
 	
 	public boolean inicioSsesionCliente () {
-		Encargado encar = new Encargado ("", "", "", "", "", 1);
 		PantallaCliente p= new PantallaCliente ();
 		
 		String sql = "SELECT * FROM `cliente` WHERE usuario=? AND clave=?";

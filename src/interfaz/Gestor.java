@@ -20,7 +20,7 @@ public class Gestor implements InicioSesion {
 	public static void main(String[] args) {
 		Gestor valida = new Gestor();
 		Validar va = new Validar ();
-		Cliente cliente = new Cliente("", "", "", "");
+		Cliente cliente = new Cliente();
 		PantallaCliente pc = new PantallaCliente ();
 		Encargado encargado = new Encargado ("", "", "", "", "", 0);
 		PantallaEncargado pe = new PantallaEncargado ();
@@ -30,8 +30,8 @@ public class Gestor implements InicioSesion {
 		//Producto prod = new Producto (0, null, 0, null, null);
 		
 		
-		Cliente cliente1 = new Cliente ("", "", "ivanivan", "123456789");
-		cliente.getClientes().add(cliente1);
+		//Cliente cliente1 = new Cliente ("", "", "ivanivan", "123456789");
+		//cliente.getClientes().add(cliente1);
 		
 		Encargado encargado1 = new Encargado("Horacio", "Perez", "juanperez", "123456789", "Encargado", 1);
 		encargado.getEncargados().add(encargado1);
@@ -43,7 +43,7 @@ public class Gestor implements InicioSesion {
 		String clave = "";
 		String claveconfirmar="";
 		String nombre="", apellido="",  usuario="";
-		boolean usuariorepetido;
+		//boolean usuariorepetido;
 		
 		int opciones2;
 		
@@ -121,16 +121,12 @@ public class Gestor implements InicioSesion {
 			capitan.setMail(usuario);
 			capitan.setClave(clave);
 			
-			if (valida.iniciarSesionClave(usuario, clave) && valida.validarMail(usuario) && encargado.inicioSesionEncargado() ) {
+			if (valida.iniciarSesionClave(usuario, clave) && valida.validarMail(usuario) && encargado.inicioSesionEncargado() || (valida.iniciarSesionClave(usuario, clave) && valida.validarMail(usuario) && cliente.inicioSsesionCliente()) ||(valida.iniciarSesionClave(usuario, clave) && valida.validarMail(usuario) && capitan.inicioSesionCapitan())) {
 				
-				
-			}else if (valida.iniciarSesionClave(usuario, clave) && valida.validarMail(usuario) && cliente.inicioSsesionCliente()) {
-				
-
-			}else if (valida.iniciarSesionClave(usuario, clave) && valida.validarMail(usuario) && capitan.inicioSesionCapitan()) {
+				System.out.println("ENTRE");
 				
 			}else {
-				JOptionPane.showMessageDialog(null, "Error en el inicio de sesion");
+				System.out.println("NO ENTRE");
 			}
 
 		}

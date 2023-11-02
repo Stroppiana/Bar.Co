@@ -1,64 +1,153 @@
 package logica;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.LinkedList;
+
+import datos.Conexion;
+
 public class Barco {
-	private int idBarco;
-	private double capacidadCombustible;
-	private int capacidadToneladas;
-	private int espacioContenedor;
-	private double velocidad;
-	private Tripulacion tripulacion;
 	
-	public Barco(int idBarco, double capacidadCombustible, int capacidadToneladas, int espacioContenedor,
-			double velocidad, Tripulacion tripulacion) {
+	private int idBarco;
+	private int combustible;
+	private int capacidadToneladas;
+	
+	public Barco(int combustible, int capacidadToneladas) {
 		super();
-		this.idBarco = idBarco;
-		this.capacidadCombustible = capacidadCombustible;
+		this.combustible = combustible;
 		this.capacidadToneladas = capacidadToneladas;
-		this.espacioContenedor = espacioContenedor;
-		this.velocidad = velocidad;
-		this.tripulacion = tripulacion;
+	}
+	
+	public Barco() {
 		
 	}
-	@Override
-	public String toString() {
-		return "Barco [idBarco=" + idBarco + ", capacidadCombustible=" + capacidadCombustible + ", capacidadToneladas="
-				+ capacidadToneladas + ", espacioContenedor=" + espacioContenedor + ", velocidad=" + velocidad
-				+ ", tripulacion=" + tripulacion + "]";
-	}
+	
+
 	public int getIdBarco() {
 		return idBarco;
 	}
 	public void setIdBarco(int idBarco) {
 		this.idBarco = idBarco;
 	}
-	public double getCapacidadCombustible() {
-		return capacidadCombustible;
-	}
-	public void setCapacidadCombustible(double capacidadCombustible) {
-		this.capacidadCombustible = capacidadCombustible;
-	}
+	
 	public int getCapacidadToneladas() {
 		return capacidadToneladas;
 	}
 	public void setCapacidadToneladas(int capacidadToneladas) {
 		this.capacidadToneladas = capacidadToneladas;
 	}
-	public int getEspacioContenedor() {
-		return espacioContenedor;
+
+	public int getCombustible() {
+		return combustible;
 	}
-	public void setEspacioContenedor(int espacioContenedor) {
-		this.espacioContenedor = espacioContenedor;
+
+	public void setCombustible(int combustible) {
+		this.combustible = combustible;
 	}
-	public double getVelocidad() {
-		return velocidad;
+
+	@Override
+	public String toString() {
+		return "Barco [idBarco=" + idBarco + ", combustible=" + combustible + ", capacidadToneladas="
+				+ capacidadToneladas + "]";
 	}
-	public void setVelocidad(double velocidad) {
-		this.velocidad = velocidad;
+	
+	
+	Conexion conexion = new Conexion ();
+	Connection con = conexion.conectar(); 
+	PreparedStatement stmt;
+	
+	public boolean crearBarco (int combustible, int capacidad, int id_ruta, int id_capitan) {
+		
+		String sql = "INSERT INTO `barco`(`combustible`, `capacidad_toneladas`, `id_ruta_maritima`, `id_capitan`)  VALUES (?,?,?,?)";
+		
+		System.out.println(sql);
+		System.out.println(stmt);
+		
+		try {
+			
+			stmt = con.prepareStatement(sql);
+			stmt.setInt(1, combustible);
+			stmt.setInt(2, capacidad);
+			stmt.setInt(3, id_ruta);
+			stmt.setInt(4, id_capitan);
+			stmt.executeUpdate();
+			return true;
+			
+		} catch (Exception e) {
+			System.out.println(e);
+			return false;
+		}
+		
+		
 	}
-	public Tripulacion getTripulacion() {
-		return tripulacion;
+	
+	public LinkedList<Barco> mostrarBarcos() {
+		String sql = "SELECT * FROM barco";
+		
+		LinkedList<Barco> barcos = new LinkedList<>();
+	    
+	    try {
+	        PreparedStatement stmt = con.prepareStatement(sql);
+
+	        ResultSet resultados = stmt.executeQuery();
+	        
+	        while (resultados.next()) {
+	            int id_barco = resultados.getInt("id_barco");
+	            int	combustible = resultados.getInt("combustible");
+				int capacidad = resultados.getInt("capacidad_toneladas");
+				int id_ruta = resultados.getInt("id_ruta_maritima");
+				int id_capitan = resultados.getInt("id_capitan");
+
+	            Barco barco = new Barco(combustible, capacidad);
+	            
+	            barcos.add(barco);
+
+	            System.out.println("ID: " + id_barco + ", COMBUSTIBLE: " + combustible + " RUTA: " + id_ruta + " capitan: " + id_capitan);
+	        }
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        System.out.println("Error");
+	    }
+	    
+	    return barcos;
+	
+	} 
+	
+	/*
+	
+	public int seleccionContenedor(int id) {
+		
+		int idContenedor = -1;
+
+		String sql = "SELECT `id_contenedor` FROM `contenedor` WHERE  `id_contenedor` = ?";
+		
+		try {
+			
+			PreparedStatement stmt = con.prepareStatement(sql);
+			
+			stmt.setInt(1, id);
+			
+			ResultSet resultado = stmt.executeQuery();
+			
+			if (resultado.next()) {
+				
+				idContenedor = resultado.getInt("id_contenedor");
+			}
+			
+		}catch (Exception e) {
+	        e.printStackTrace();
+	        System.out.println("Error");
+		}
+		
+		
+		return idContenedor;
 	}
-	public void setTripulacion(Tripulacion tripulacion) {
-		this.tripulacion = tripulacion;
-	}
+	*/
+	
+	
+	
+	
+	
 }
