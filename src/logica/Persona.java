@@ -15,6 +15,11 @@ public class Persona {
 		this.clave = clave;
 
 	}
+	
+	public Persona() {
+		
+	}
+	
 	public String getNombre() {
 		return nombre;
 	}

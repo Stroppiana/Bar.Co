@@ -20,7 +20,6 @@ public class Encargado extends Persona {
 	public Encargado(String nombre, String apellido, String mail, String clave, String rol, int idEncargado) {
 		super(nombre, apellido, mail, clave);
 		this.idEncargado = idEncargado;
-		this.encargados = encargados;
 	}
 
 	public int getIdEncargado() {
@@ -138,12 +137,14 @@ public class Encargado extends Persona {
 		return 0;
 	}
 
-	Cliente cl = new Cliente("", "", "", "");
+	Cliente cl = new Cliente();
 
 	public LinkedList<Cliente> MostrarClientes() {
+		
+		LinkedList<Cliente> clientes = new LinkedList<>();
 
 		String sql = "SELECT * from `cliente` WHERE 1";
-		String datos[] = new String[4];
+		//String datos[] = new String[4];
 
 		try {
 
@@ -152,15 +153,23 @@ public class Encargado extends Persona {
 
 			while (resultados.next()) {
 
-				datos[0] = resultados.getString(1);
+				/*datos[0] = resultados.getString(1);
 				datos[1] = resultados.getString(2);
 				datos[2] = resultados.getString(3);
 				datos[3] = resultados.getString(4);
+				*/
+				
+				int id = resultados.getInt(1);
+				String nombre = resultados.getString(2);
+				String apellido = resultados.getString(3);
+				String usuario = resultados.getString(4);
+				String clave = resultados.getString(5);
 
-				cl.getClientes().add(new Cliente(datos[0], datos[1], datos[2], datos[3]));
+				clientes.add(new Cliente(id, nombre, apellido, usuario, clave));
+				
 			}
 
-			if (cl.getClientes().isEmpty()) {
+			if (clientes.isEmpty()) {
 
 				String mensaje = "No hay clientes";
 				System.out.println(mensaje);
@@ -168,7 +177,7 @@ public class Encargado extends Persona {
 
 			} else {
 
-				return cl.getClientes();
+				return clientes;
 			}
 		} catch (Exception e) {
 
