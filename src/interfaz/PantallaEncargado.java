@@ -281,7 +281,7 @@ public class PantallaEncargado implements InicioSesion {
 			
 			JOptionPane.showMessageDialog(null, envio.mostrarEnvios());
 			
-			System.out.println("ULTIMO CAMBIO");
+			System.out.println("ULTIMO CAMBIOS");
 			
 			break;
 
