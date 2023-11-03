@@ -9,7 +9,6 @@ import javax.swing.JOptionPane;
 
 import datos.Conexion;
 import interfaz.PantallaCapitan;
-import interfaz.PantallaEncargado;
 
 public class Capitan extends Persona {
 	private int idCapitan;
@@ -18,7 +17,7 @@ public class Capitan extends Persona {
 	public Capitan(String nombre, String apellido, String mail, String clave, String rol, int idCapitan) {
 		super(nombre, apellido, mail, clave);
 		this.idCapitan = idCapitan;
-		this.capitanes = capitanes;
+		//this.capitanes = capitanes;
 	}
 	public int getIdCapitan() {
 		return idCapitan;

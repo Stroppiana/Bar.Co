@@ -13,8 +13,9 @@ public class Barco {
 	private int combustible;
 	private int capacidadToneladas;
 	
-	public Barco(int combustible, int capacidadToneladas) {
+	public Barco(int idBarco,int combustible, int capacidadToneladas) {
 		super();
+		this.idBarco = idBarco;
 		this.combustible = combustible;
 		this.capacidadToneladas = capacidadToneladas;
 	}
@@ -99,11 +100,11 @@ public class Barco {
 				int id_ruta = resultados.getInt("id_ruta_maritima");
 				int id_capitan = resultados.getInt("id_capitan");
 
-	            Barco barco = new Barco(combustible, capacidad);
+	            Barco barco = new Barco(id_barco, combustible, capacidad);
 	            
 	            barcos.add(barco);
 
-	            System.out.println("ID: " + id_barco + ", COMBUSTIBLE: " + combustible + " RUTA: " + id_ruta + " capitan: " + id_capitan);
+	            System.out.println("ID: " + id_barco + ", COMBUSTIBLE: " + combustible + ", CAPACIDAD: " + capacidad +" RUTA: " + id_ruta + " capitan: " + id_capitan);
 	        }
 
 	    } catch (Exception e) {
@@ -115,13 +116,12 @@ public class Barco {
 	
 	} 
 	
-	/*
 	
-	public int seleccionContenedor(int id) {
+	public int seleccionarBarco(int id) {
 		
-		int idContenedor = -1;
+		int idBarco = -1;
 
-		String sql = "SELECT `id_contenedor` FROM `contenedor` WHERE  `id_contenedor` = ?";
+		String sql = "SELECT `id_barco` FROM `barco` WHERE  `id_barco` = ?";
 		
 		try {
 			
@@ -133,7 +133,7 @@ public class Barco {
 			
 			if (resultado.next()) {
 				
-				idContenedor = resultado.getInt("id_contenedor");
+				idBarco = resultado.getInt("id_barco");
 			}
 			
 		}catch (Exception e) {
@@ -142,10 +142,29 @@ public class Barco {
 		}
 		
 		
-		return idContenedor;
+		return idBarco;
 	}
-	*/
+
 	
+	public boolean asignarContenedor(int idBarco, int idContenedor) {
+		
+		String sql = "INSERT INTO `barco_contenedor`(`id_barco`, `id_contenedor`) VALUES (?,?)";
+		
+		try {
+			
+			stmt = con.prepareStatement(sql);
+			stmt.setInt(1, idBarco);
+			stmt.setInt(2, idContenedor);
+			stmt.executeUpdate();
+			return true;
+			
+		} catch (Exception e) {
+			System.out.println(e);
+			return false;
+		}
+		
+
+	}
 	
 	
 	

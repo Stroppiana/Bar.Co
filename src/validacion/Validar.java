@@ -1,5 +1,4 @@
 package validacion;
-import javax.swing.JOptionPane;
 
 import interfaz.Gestor;
 import logica.Capitan;
