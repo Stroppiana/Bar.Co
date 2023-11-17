@@ -9,7 +9,6 @@ import javax.swing.JOptionPane;
 
 import datos.Conexion;
 import interfaz.PantallaCapitan;
-import interfaz.PantallaEncargado;
 
 public class Capitan extends Persona {
 	private int idCapitan;
@@ -18,7 +17,7 @@ public class Capitan extends Persona {
 	public Capitan(String nombre, String apellido, String mail, String clave, String rol, int idCapitan) {
 		super(nombre, apellido, mail, clave);
 		this.idCapitan = idCapitan;
-		this.capitanes = capitanes;
+		//this.capitanes = capitanes;
 	}
 	public int getIdCapitan() {
 		return idCapitan;
@@ -79,4 +78,34 @@ public class Capitan extends Persona {
 		
 		
 	}
+	
+	public String informeDiario(int dias) {
+		String informe = "\n* ------- *\n";	
+		int evento = 0;
+		
+		for (int i = 0; i <= dias; i++) {
+			
+			evento = (int) (Math.random()*3+1);
+			
+			switch (evento) {
+			case 1:
+				informe += "Dia: " + i + " se hundio el barco \n";
+				break;
+			case 2:
+				informe += "Dia: " + i + " se prendio fuego el barco \n";
+				break;
+				
+			case 3:
+				informe += "Dia: " + i + " todo bien en el barco \n";
+				break;
+			default:
+				break;
+			}
+			
+		}
+		
+	
+		return informe;
+	}
+	
 }

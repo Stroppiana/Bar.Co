@@ -122,8 +122,6 @@ public class PantallaCliente implements InicioSesion {
 				System.out.println(divisaSeleccionada.getId_divisa());
 				
 				System.out.println(cliente.solicitarEnvio(productoNuevo, divisaSeleccionada));
-
-				// cliente.solicitarEnvio(productoNuevo, divisaEligida);
 				
 				break;
 			case 1:
