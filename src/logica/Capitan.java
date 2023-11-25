@@ -19,6 +19,11 @@ public class Capitan extends Persona {
 		this.idCapitan = idCapitan;
 		//this.capitanes = capitanes;
 	}
+	
+	public Capitan() {
+		
+	}
+	
 	public int getIdCapitan() {
 		return idCapitan;
 	}
