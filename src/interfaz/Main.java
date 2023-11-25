@@ -1,7 +1,7 @@
 package interfaz;
 import datos.Conexion;
 import logica.Encargado;
-import pantallas.login;
+import pantallas.Loginn;
 
 import java.sql.Connection;
 import javax.swing.JOptionPane;
@@ -10,10 +10,9 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		System.out.println("Creacion del proyecto Bar.Co");
+	System.out.println("Creacion del proyecto Bar.Co");
 		
-		/*
-		
+			
 		//probando si la coneccion a la base de datos funciona
 		Conexion conexion = new Conexion ();
 		Connection con = conexion.conectar(); 
@@ -32,9 +31,18 @@ public class Main {
 		
 		JOptionPane.showMessageDialog(null, "probando rama");
 		
-		*/
+		/*
+		
 		login login =new login();
 		login.run();
+			*/
+		
+		/*Login login = new Login()
+		 * login.run()*/
+		
+		Loginn log = new Loginn();
+		log.run();
+		
 	}
 
 }

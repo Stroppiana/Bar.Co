@@ -34,9 +34,7 @@ public interface InicioSesion {
 	//cambiar a 8 digitos
 		if (clave.isEmpty() || clave.length() < 2 ) {
 			if (claverepetida.isEmpty() || claverepetida.length() <2 || clave != claverepetida) {
-				
-				//JOptionPane.showMessageDialog(null, "Error en la clave, vuelva a ingresarlo");
-			
+							
 			}
 			return false;
 
@@ -51,10 +49,8 @@ public interface InicioSesion {
 	public default boolean validarMail (String usuario) {
 		
 		if (usuario.contains("@") && usuario.contains(".com") && usuario.length()>2) {
-			
 			return true;
 		}else {
-			//JOptionPane.showMessageDialog(null, "Error en el usuario, vuelva a ingresarlo");
 			return false;
 		}
 		

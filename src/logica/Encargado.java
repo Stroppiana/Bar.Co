@@ -21,6 +21,10 @@ public class Encargado extends Persona {
 		super(nombre, apellido, mail, clave);
 		this.idEncargado = idEncargado;
 	}
+	
+	public Encargado() {
+		
+	}
 
 	public int getIdEncargado() {
 		return idEncargado;

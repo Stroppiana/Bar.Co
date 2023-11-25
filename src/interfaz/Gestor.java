@@ -13,13 +13,11 @@ import logica.Envio;
 import logica.HistorialEnvio;
 import logica.InicioSesion;
 import logica.Producto;
-import validacion.Validar;
 
 public class Gestor implements InicioSesion {
 
 	public static void main(String[] args) {
 		Gestor valida = new Gestor();
-		Validar va = new Validar ();
 		Cliente cliente = new Cliente();
 		PantallaCliente pc = new PantallaCliente ();
 		Encargado encargado = new Encargado ("", "", "", "", "", 0);
