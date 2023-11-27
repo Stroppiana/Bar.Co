@@ -5,11 +5,18 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import logica.Divisa;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.JSpinner;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
@@ -55,25 +62,77 @@ public class Divisas extends JFrame {
 		lblNewLabel_1_1.setFont(new Font("OCR A Extended", Font.PLAIN, 16));
 		lblNewLabel_1_1.setBounds(22, 219, 227, 14);
 		contentPane.add(lblNewLabel_1_1);
-		
-		JButton btnNewButton = new JButton("ACEPTAR");
-		btnNewButton.setFont(new Font("OCR A Extended", Font.PLAIN, 12));
-		btnNewButton.setBounds(148, 345, 101, 34);
-		contentPane.add(btnNewButton);
+				
 		
 		JTextField nombreDivisa = new JTextField();
+		nombreDivisa.setBackground(new Color(124, 155, 173));
 		nombreDivisa.setBounds(22, 153, 215, 34);
 		contentPane.add(nombreDivisa);
 		nombreDivisa.setColumns(10);
 		
 		cotizacion = new JTextField();
+		cotizacion.setBackground(new Color(124, 155, 173));
 		cotizacion.setColumns(10);
 		cotizacion.setBounds(22, 259, 215, 34);
 		contentPane.add(cotizacion);
+		
+		JButton aceptar = new JButton("ACEPTAR");
+		aceptar.setBackground(new Color(0, 179, 179));
+		aceptar.setFont(new Font("OCR A Extended", Font.PLAIN, 12));
+		aceptar.setBounds(148, 345, 101, 34);
+		contentPane.add(aceptar);
+		
+		
+		aceptar.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        String tipo = nombreDivisa.getText();
+		        try {
+		            double coti = Double.parseDouble(cotizacion.getText());
+
+		            Divisa divisa = new Divisa(tipo, coti);
+		            divisa.ingresarDivisa(divisa);
+
+		            JOptionPane.showMessageDialog(contentPane, "Divisa ingresada", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+		            nombreDivisa.setText("");
+		            cotizacion.setText("");
+		            
+		            volverAlMenu();
+
+
+		        } catch (NumberFormatException ex) {
+		            JOptionPane.showMessageDialog(contentPane, "Ingrese una cotización válida.", "Error", JOptionPane.ERROR_MESSAGE);
+		        }
+		    }
+		});
+		
+		JButton volverMenu = new JButton("<- Menu");
+		volverMenu.setBackground(new Color(0, 179, 179));
+		volverMenu.setFont(new Font("OCR A Extended", Font.PLAIN, 11));
+		volverMenu.setBounds(501, 58, 109, 28);
+		contentPane.add(volverMenu);
+		
+		volverMenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			    PantallaEncargado menu = new PantallaEncargado();
+
+				menu.run();
+				dispose();
+				
+			}
+		});
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(Divisas.class.getResource("/resources/divisas.png")));
 		lblNewLabel.setBounds(0, 0, 639, 456);
 		contentPane.add(lblNewLabel);
+	}
+	
+	private void volverAlMenu() {
+	    PantallaEncargado menu = new PantallaEncargado();
+	    setContentPane(menu.getContentPane());
+	    revalidate();
+	    repaint();
 	}
 }

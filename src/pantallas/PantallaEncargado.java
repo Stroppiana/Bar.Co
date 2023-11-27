@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.Font;
+import java.awt.Color;
 
 public class PantallaEncargado extends JFrame {
 
@@ -41,40 +42,73 @@ public class PantallaEncargado extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton productoContenedor = new JButton("PRODUCTOS-CONTENEDOR");
-		productoContenedor.setFont(new Font("OCR A Extended", Font.PLAIN, 9));
+		JButton productoContenedor = new JButton("CARGA-CONT");
+		productoContenedor.setForeground(new Color(0, 0, 0));
+		productoContenedor.setBackground(new Color(0, 179, 179));
+		productoContenedor.setFont(new Font("OCR A Extended", Font.PLAIN, 12));
 		productoContenedor.setBounds(54, 125, 137, 41);
 		contentPane.add(productoContenedor);
 		
 		JButton rutasMartimas = new JButton("RUTAS MARITIMAS");
-		rutasMartimas.setFont(new Font("OCR A Extended", Font.PLAIN, 9));
+		rutasMartimas.setBackground(new Color(0, 179, 179));
+		rutasMartimas.setFont(new Font("OCR A Extended", Font.PLAIN, 12));
 		rutasMartimas.setBounds(54, 213, 137, 41);
 		contentPane.add(rutasMartimas);
 		
 		JButton barco = new JButton("BARCO");
-		barco.setFont(new Font("OCR A Extended", Font.PLAIN, 9));
+		barco.setBackground(new Color(0, 179, 179));
+		barco.setFont(new Font("OCR A Extended", Font.PLAIN, 12));
 		barco.setBounds(54, 299, 137, 41);
 		contentPane.add(barco);
 		
-		JButton barcoContenedor = new JButton("BARCO-CONTENEDOR");
-		barcoContenedor.setFont(new Font("OCR A Extended", Font.PLAIN, 9));
+		JButton barcoContenedor = new JButton("BARCO-CONT");
+		barcoContenedor.setBackground(new Color(0, 179, 179));
+		barcoContenedor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		barcoContenedor.setFont(new Font("OCR A Extended", Font.PLAIN, 12));
 		barcoContenedor.setBounds(449, 125, 137, 41);
 		contentPane.add(barcoContenedor);
 		
 		JButton divisas = new JButton("DIVISAS");
-		divisas.setFont(new Font("OCR A Extended", Font.PLAIN, 9));
+		divisas.setBackground(new Color(0, 179, 179));
+		divisas.setFont(new Font("OCR A Extended", Font.PLAIN, 12));
 		divisas.setBounds(449, 213, 137, 41);
 		contentPane.add(divisas);
 		
+		divisas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Divisas div = new Divisas();
+				div.run();
+				dispose();
+				
+			}
+		});
+		
 		JButton clientes = new JButton("CLIENTES");
-		clientes.setFont(new Font("OCR A Extended", Font.PLAIN, 9));
+		clientes.setBackground(new Color(0, 179, 179));
+		clientes.setFont(new Font("OCR A Extended", Font.PLAIN, 12));
 		clientes.setBounds(449, 299, 137, 41);
 		contentPane.add(clientes);
 		
-		JButton volver = new JButton("VOLVER");
-		volver.setFont(new Font("OCR A Extended", Font.PLAIN, 12));
-		volver.setBounds(501, 61, 85, 32);
-		contentPane.add(volver);
+		JButton salir = new JButton("SALIR");
+		salir.setBackground(new Color(0, 179, 179));
+		salir.setFont(new Font("OCR A Extended", Font.PLAIN, 12));
+		salir.setBounds(501, 61, 85, 32);
+		contentPane.add(salir);
+		
+		salir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Loginn log = new Loginn();
+				log.run();
+				dispose();
+				
+			}
+		});
+		
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(PantallaEncargado.class.getResource("/resources/encargadomenu.png")));
