@@ -84,7 +84,7 @@ public class Registrarse extends JFrame {
 		contentPane.add(lblRepitaContrasea);
 		
 		JButton btnNewButton = new JButton("Registrarse");
-		btnNewButton.setBackground(new Color(0, 187, 187));
+		btnNewButton.setBackground(new Color(0, 179, 179));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -117,7 +117,7 @@ public class Registrarse extends JFrame {
 		contentPane.add(textField_2);
 		
 		JButton btnVolver = new JButton("Volver");
-		btnVolver.setBackground(new Color(0, 187, 187));
+		btnVolver.setBackground(new Color(0, 179, 179));
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Loginn log = new Loginn ();

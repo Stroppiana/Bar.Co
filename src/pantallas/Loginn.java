@@ -53,7 +53,7 @@ public class Loginn extends JFrame {
 		contentPane.setLayout(null);
 		
 		Button iniciarSesionBoton = new Button("INICIAR SESION");
-		iniciarSesionBoton.setBackground(new Color(51, 102, 153));
+		iniciarSesionBoton.setBackground(new Color(124, 155, 173));
 		iniciarSesionBoton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				IniciarSesion is= new IniciarSesion();
@@ -68,7 +68,7 @@ public class Loginn extends JFrame {
 		contentPane.add(iniciarSesionBoton);
 		
 		Button registrarseBoton = new Button("REGISTRARSE");
-		registrarseBoton.setBackground(new Color(0, 102, 153));
+		registrarseBoton.setBackground(new Color(124, 155, 173));
 		registrarseBoton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				

@@ -1,7 +1,9 @@
 package interfaz;
 import datos.Conexion;
 import logica.Encargado;
+import pantallas.Divisas;
 import pantallas.Loginn;
+import pantallas.PantallaProducto;
 import pantallas.Puertos;
 
 import java.sql.Connection;
@@ -40,11 +42,16 @@ public class Main {
 		
 		/*Login login = new Login()
 		 * login.run()*/
-		
+		/*
 		Loginn log = new Loginn();
 		log.run();
 		Puertos p = new Puertos();
-		p.run();
+		p.run();*/
+	
+		
+		
+		PantallaProducto pantalla = new PantallaProducto();
+		pantalla.run();
 		
 	}
 
