@@ -84,6 +84,7 @@ public class Registrarse extends JFrame {
 		contentPane.add(lblRepitaContrasea);
 		
 		JButton btnNewButton = new JButton("Registrarse");
+		btnNewButton.setBackground(new Color(0, 187, 187));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -98,21 +99,25 @@ public class Registrarse extends JFrame {
 		contentPane.add(btnNewButton);
 		
 		textField = new JTextField();
+		textField.setBackground(new Color(124, 155, 174));
 		textField.setBounds(261, 87, 239, 30);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
 		textField_1 = new JTextField();
+		textField_1.setBackground(new Color(124, 155, 174));
 		textField_1.setColumns(10);
 		textField_1.setBounds(261, 126, 239, 30);
 		contentPane.add(textField_1);
 		
 		textField_2 = new JTextField();
+		textField_2.setBackground(new Color(124, 155, 174));
 		textField_2.setColumns(10);
 		textField_2.setBounds(261, 167, 239, 30);
 		contentPane.add(textField_2);
 		
 		JButton btnVolver = new JButton("Volver");
+		btnVolver.setBackground(new Color(0, 187, 187));
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Loginn log = new Loginn ();
@@ -125,10 +130,12 @@ public class Registrarse extends JFrame {
 		contentPane.add(btnVolver);
 		
 		passwordField_1 = new JPasswordField();
+		passwordField_1.setBackground(new Color(124, 155, 174));
 		passwordField_1.setBounds(261, 249, 239, 30);
 		contentPane.add(passwordField_1);
 		
 		passwordField_2 = new JPasswordField();
+		passwordField_2.setBackground(new Color(124, 155, 174));
 		passwordField_2.setBounds(261, 208, 239, 30);
 		contentPane.add(passwordField_2);
 		
