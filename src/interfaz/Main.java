@@ -1,12 +1,17 @@
 package interfaz;
 import datos.Conexion;
 import logica.Encargado;
+import logica.RutaMaritima;
+import pantallas.PantallaBarco;
+import pantallas.CargaContenedor;
 import pantallas.Divisas;
 import pantallas.Loginn;
 import pantallas.PantallaProducto;
 import pantallas.Puertos;
 
 import java.sql.Connection;
+import java.util.LinkedList;
+
 import javax.swing.JOptionPane;
 
 public class Main {
@@ -16,11 +21,12 @@ public class Main {
 	System.out.println("Creacion del proyecto Bar.Co");
 		
 			
-		//probando si la coneccion a la base de datos funciona
+		
+	/*
 		Conexion conexion = new Conexion ();
 		Connection con = conexion.conectar(); 
 		
-		/*
+		
 		
 		Encargado encargado = new Encargado ("", "", "", "", "", 0);
 		PantallaEncargado pe = new PantallaEncargado ();
@@ -34,24 +40,22 @@ public class Main {
 		
 		JOptionPane.showMessageDialog(null, "probando rama");
 		
-		/*
-		
-		login login =new login();
-		login.run();
-			*/
-		
-		/*Login login = new Login()
-		 * login.run()*/
-		/*
+
+	
 		Loginn log = new Loginn();
 		log.run();
-		Puertos p = new Puertos();
-		p.run();*/
+		
+		*/
+	
+		CargaContenedor c = new CargaContenedor();
+		
+		c.run();
+		
+		
+	
 	
 		
 		
-		PantallaProducto pantalla = new PantallaProducto();
-		pantalla.run();
 		
 	}
 

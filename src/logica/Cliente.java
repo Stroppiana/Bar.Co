@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
 import datos.Conexion;
-import interfaz.PantallaCliente;
+import pantallas.PantallaUsuario;
 //import java.util.concurrent.atomic.AtomicInteger;
 
 public class Cliente extends Persona {
@@ -75,7 +75,7 @@ public class Cliente extends Persona {
 	
 	
 	public boolean inicioSsesionCliente () {
-		PantallaCliente p= new PantallaCliente ();
+		PantallaUsuario p= new PantallaUsuario ();
 		
 		String sql = "SELECT * FROM `cliente` WHERE usuario=? AND clave=?";
 
@@ -89,7 +89,7 @@ public class Cliente extends Persona {
 
 
 		    if (resultados.next()==true) {
-		    	p.MenuCliente(this, he);
+		    	p.run();
 
 		        return true;
 		        

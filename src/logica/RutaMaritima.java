@@ -3,6 +3,8 @@ package logica;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.LinkedList;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import datos.Conexion;
 
@@ -14,6 +16,8 @@ public class RutaMaritima {
 	private int destino;
 	private double distancia;
 	private String tiempoViaje;
+	private String ruta;
+	
 	
 	public RutaMaritima() {
 		
@@ -26,6 +30,31 @@ public class RutaMaritima {
 		this.distancia = distancia;
 		this.tiempoViaje = tiempoViaje;
 	}
+	
+	public RutaMaritima(int idRuta, int origen, int destino, double distancia, String tiempoViaje) {
+		super();
+		this.origen = origen;
+		this.destino = destino;
+		this.distancia = distancia;
+		this.tiempoViaje = tiempoViaje;
+	}
+	
+	
+	public RutaMaritima(String ruta) {
+		this.ruta = ruta;
+	}
+
+
+
+
+	public String getRuta() {
+		return ruta;
+	}
+
+	public void setRuta(String ruta) {
+		this.ruta = ruta;
+	}
+
 	public int getIdRuta() {
 		return idRuta;
 	}
@@ -178,6 +207,45 @@ public class RutaMaritima {
 
 	    return distancia;
 	}
+	
+	
+		public LinkedList<RutaMaritima> mostrarRutas() {
+		String sql = "SELECT * FROM ruta_maritima";
+		
+		LinkedList<RutaMaritima> rutas = new LinkedList<>();
+	    
+	    try {
+	        PreparedStatement stmt = con.prepareStatement(sql);
+
+	        ResultSet resultados = stmt.executeQuery();
+	        
+	        while (resultados.next()) {
+	            int id_ruta_maritima = resultados.getInt("id_ruta_maritima");
+	            int origen = resultados.getInt("origen");
+	            int destino = resultados.getInt("destino");
+	            double distancia_ruta = resultados.getDouble("distancia_ruta");
+	            String tiempo_viaje = resultados.getString("tiempo_viaje");
+	           
+	            
+	            RutaMaritima ruta = new RutaMaritima(id_ruta_maritima, origen, destino, distancia_ruta, tiempo_viaje);
+	            
+	            
+	            rutas.add(ruta);
+
+	            System.out.println("ID: " + id_ruta_maritima + ", RUTA ORIGEN: " + origen + ", Destino: " + destino);
+	        }
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        System.out.println("Error");
+	    }
+	    
+	    return rutas;
+	
+	}
+		
+
+	
 
 	
 	
