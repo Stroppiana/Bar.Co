@@ -48,10 +48,22 @@ public class PantallaEncargado extends JFrame {
 		productoContenedor.setFont(new Font("OCR A Extended", Font.PLAIN, 12));
 		productoContenedor.setBounds(54, 125, 137, 41);
 		contentPane.add(productoContenedor);
+		productoContenedor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CargaContenedor carga = new CargaContenedor();
+				carga.run();
+			}
+		});
 		
 		JButton rutasMartimas = new JButton("RUTAS MARITIMAS");
+		rutasMartimas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Puertos puerto = new Puertos();
+				puerto.run();
+			}
+		});
 		rutasMartimas.setBackground(new Color(0, 179, 179));
-		rutasMartimas.setFont(new Font("OCR A Extended", Font.PLAIN, 12));
+		rutasMartimas.setFont(new Font("OCR A Extended", Font.PLAIN, 10));
 		rutasMartimas.setBounds(54, 213, 137, 41);
 		contentPane.add(rutasMartimas);
 		
@@ -61,10 +73,21 @@ public class PantallaEncargado extends JFrame {
 		barco.setBounds(54, 299, 137, 41);
 		contentPane.add(barco);
 		
+		barco.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PantallaBarco barco = new PantallaBarco();
+				barco.run();
+			}
+		});
+		
 		JButton barcoContenedor = new JButton("BARCO-CONT");
 		barcoContenedor.setBackground(new Color(0, 179, 179));
 		barcoContenedor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				BarcoContenedor barCont = new BarcoContenedor();
+				
+				barCont.run();
+				
 			}
 		});
 		barcoContenedor.setFont(new Font("OCR A Extended", Font.PLAIN, 12));
@@ -104,6 +127,22 @@ public class PantallaEncargado extends JFrame {
 				
 				Loginn log = new Loginn();
 				log.run();
+				dispose();
+				
+			}
+		});
+		
+		JButton hacerEnvio = new JButton("HACER ENVIO");
+		hacerEnvio.setFont(new Font("OCR A Extended", Font.PLAIN, 12));
+		hacerEnvio.setBackground(new Color(0, 179, 179));
+		hacerEnvio.setBounds(259, 392, 137, 41);
+		contentPane.add(hacerEnvio);
+		
+		hacerEnvio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				HacerEnvio env = new HacerEnvio();
+				env.run();
 				dispose();
 				
 			}

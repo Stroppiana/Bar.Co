@@ -109,10 +109,6 @@ public class IniciarSesion extends JFrame  implements InicioSesion{
     				
     				System.out.println("ENTRE");
     				
-    			       if (encargado != null) {
-    	                    PantallaEncargado en = new PantallaEncargado();
-    	                    en.run();
-    	                }
     				
     			}else {
     				System.out.println("NO ENTRE");

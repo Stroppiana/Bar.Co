@@ -64,7 +64,7 @@ public class Loginn extends JFrame {
 		});
 		
 		iniciarSesionBoton.setFont(new Font("Franklin Gothic Book", Font.BOLD, 16));
-		iniciarSesionBoton.setBounds(414, 368, 161, 47);
+		iniciarSesionBoton.setBounds(393, 362, 161, 47);
 		contentPane.add(iniciarSesionBoton);
 		
 		Button registrarseBoton = new Button("REGISTRARSE");
@@ -79,12 +79,12 @@ public class Loginn extends JFrame {
 			}
 		});
 		registrarseBoton.setFont(new Font("Franklin Gothic Book", Font.BOLD, 16));
-		registrarseBoton.setBounds(91, 368, 161, 47);
+		registrarseBoton.setBounds(83, 362, 161, 47);
 		contentPane.add(registrarseBoton);
 		
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon(Loginn.class.getResource("/resources/loggo.png")));
-		lblNewLabel_1.setBounds(195, 54, 265, 308);
+		lblNewLabel_1.setBounds(175, 51, 265, 308);
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel = new JLabel("");

@@ -119,6 +119,7 @@ public class Producto {
 	} 
 	
 	
+	
 	public int seleccionProducto(String nombreProducto) {
 		
 		int idProducto = -1;

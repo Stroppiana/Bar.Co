@@ -3,7 +3,7 @@ package logica;
 import javax.swing.JOptionPane;
 
 import datos.Conexion;
-import interfaz.PantallaEncargado;
+import pantallas.PantallaEncargado;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -68,7 +68,7 @@ public class Encargado extends Persona {
 			ResultSet resultados = stmt.executeQuery();
 
 			if (resultados.next() == true) {
-				pe.MenuEncargado(this);
+				pe.run();
 
 				return true;
 
