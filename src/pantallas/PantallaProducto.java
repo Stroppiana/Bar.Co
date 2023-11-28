@@ -79,7 +79,7 @@ public class PantallaProducto extends JFrame implements DatosProducto{
 		                opcionesDivisa[i] = divisas.get(i).getTipo();
 		            }
 
-		            int seleccionada = JOptionPane.showOptionDialog(null,
+		            int seleccionada = JOptionPane.showOptionDialog(contentPane,
 		                    "Selecciona una divisa:",
 		                    "Selección de Divisa",
 		                    JOptionPane.DEFAULT_OPTION,
@@ -96,7 +96,7 @@ public class PantallaProducto extends JFrame implements DatosProducto{
 		                        JOptionPane.INFORMATION_MESSAGE);
 		            }
 		        } else {
-		            JOptionPane.showMessageDialog(null, "No hay divisas disponibles.", "Error", JOptionPane.ERROR_MESSAGE);
+		            JOptionPane.showMessageDialog(contentPane, "No hay divisas disponibles.", "Error", JOptionPane.ERROR_MESSAGE);
 		        }
 		    }
 		});

@@ -12,11 +12,21 @@ import javax.swing.border.EmptyBorder;
 
 import logica.Barco;
 import logica.Envio;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
 
 public class HacerEnvio extends JFrame {
 
 	private JPanel contentPane;
-
+	private int idBarco;
+	private JTextField fecha;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -35,76 +45,117 @@ public class HacerEnvio extends JFrame {
 	 */
 	public HacerEnvio() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 657, 497);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
+	
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
 		
-		/*			
-			
-			Barco barcoEnvio = new Barco();
-			
-				LinkedList<Barco> barcos = barcoEnvio.mostrarBarcos();
-			
-			if (!barcos.isEmpty()) {
+		JButton barco = new JButton("SELECCIONAR BARCO");
+		barco.setFont(new Font("OCR A Extended", Font.PLAIN, 16));
+		barco.setBackground(new Color(0, 185, 185));
+		barco.setBounds(20, 75, 266, 43);
+		contentPane.add(barco);
+		
+		barco.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Barco barco = new Barco();
 
+				LinkedList<Barco> barcos = barco.mostrarBarcos();
 				String[] opcionesBarcos = new String[barcos.size()];
 
 				for (int i = 0; i < barcos.size(); i++) {
 					opcionesBarcos[i] = String.valueOf(barcos.get(i).getIdBarco());
 				}
-				
+			
 
-				String barcoID = (String) JOptionPane.showInputDialog(null, "Elija el BARCO", "Ventana",
-						JOptionPane.DEFAULT_OPTION, null, opcionesBarcos, opcionesBarcos[0]);
+				String b1 = (String) JOptionPane.showInputDialog(contentPane, "Elija el ID del BARCO", "Ventana",
+				        JOptionPane.DEFAULT_OPTION, null, opcionesBarcos, opcionesBarcos[0]);
 				
-				System.out.println(barcoID);
+				idBarco = Integer.parseInt(b1); 
 				
-				int idBarco = Integer.parseInt(barcoID);
+				int idSeleccionado = barco.seleccionarBarco(idBarco);
+
+				System.out.println(idSeleccionado);
 				
-				int idSeleccionado = barcoEnvio.seleccionarBarco(idBarco);
-				
+			}
+		});
+		
+		
+		JLabel lblNewLabel_1 = new JLabel("INGRESAR FECHA ENVIO");
+		lblNewLabel_1.setFont(new Font("OCR A Extended", Font.PLAIN, 16));
+		lblNewLabel_1.setForeground(new Color(0, 185, 185));
+		lblNewLabel_1.setBounds(20, 157, 253, 14);
+		contentPane.add(lblNewLabel_1);
+		
+		fecha = new JTextField();
+		fecha.setBackground(new Color(124, 155, 173));
+		fecha.setBounds(20, 198, 228, 34);
+		contentPane.add(fecha);
+		fecha.setColumns(10);
+		
+		JButton aceptar = new JButton("ACEPTAR");
+		aceptar.setFont(new Font("OCR A Extended", Font.PLAIN, 16));
+		aceptar.setBackground(new Color(0, 185, 185));
+		aceptar.setBounds(20, 283, 143, 34);
+		contentPane.add(aceptar);
+		
+		aceptar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				
 				int idCliente = 1;
 				int idEncargado = 1;
 				
-				String seleccion = JOptionPane.showInputDialog("Desea seleccionar cliente? ");
 				
-				if (seleccion.equalsIgnoreCase("SI")) {
-					idCliente = Integer.parseInt(JOptionPane.showInputDialog("ID CLIENTE"));
-				}
-				
-				 String input = JOptionPane.showInputDialog("Ingrese una fecha (yyyy-MM-dd):");
+				 String input = fecha.getText();
 
-			        try {
+			      
 			            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 			            LocalDate fechaEntrega = LocalDate.parse(input, formatter);
 			            
 			            LocalDate fechaEnvio = LocalDate.now();
-			            JOptionPane.showMessageDialog(null, "Fecha ingresada: " + fechaEntrega.toString());
+			            JOptionPane.showMessageDialog(contentPane, "Fecha ingresada: " + fechaEntrega.toString());
 			            
 			        	Envio envio = new Envio();
 						
-						if (envio.generarEnvio(fechaEnvio, fechaEntrega, idSeleccionado, idCliente, idEncargado)) {
-							JOptionPane.showMessageDialog(null, "ENVIO GENERADO");
+						if (envio.generarEnvio(fechaEnvio, fechaEntrega, idBarco, idCliente, idEncargado)) {
+							JOptionPane.showMessageDialog(contentPane, "ENVIO GENERADO");
 						}else {
-							JOptionPane.showMessageDialog(null, "ERROR GENERAR ENVIO");
+							JOptionPane.showMessageDialog(contentPane, "ERROR GENERAR ENVIO");
 						}
 			            
-			        } catch (Exception e) {
-			            JOptionPane.showMessageDialog(null, "Formato de fecha incorrecto. Utilice yyyy-MM-dd.");
-			        }
-								
-			
+						fecha.setText("");
+			        
 				
-			}else {
-				JOptionPane.showMessageDialog(null, "LISTA VACIA");
 			}
-			*/
+		});
 		
+		JButton menu = new JButton("<- Menu");
+		menu.setFont(new Font("OCR A Extended", Font.PLAIN, 12));
+		menu.setBackground(new Color(0, 185, 185));
+		menu.setBounds(516, 75, 89, 23);
+		contentPane.add(menu);
 		
+		menu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			    PantallaEncargado menu = new PantallaEncargado();
 
-		setContentPane(contentPane);
+				menu.run();
+				dispose();
+				
+			}
+		});
+		
+		
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(HacerEnvio.class.getResource("/resources/envio.png")));
+		lblNewLabel.setBounds(0, 0, 639, 458);
+		contentPane.add(lblNewLabel);
 	}
 
 }

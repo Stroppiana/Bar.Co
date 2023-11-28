@@ -3,8 +3,10 @@ import datos.Conexion;
 import logica.Encargado;
 import logica.RutaMaritima;
 import pantallas.PantallaBarco;
+import pantallas.BarcoContenedor;
 import pantallas.CargaContenedor;
 import pantallas.Divisas;
+import pantallas.HacerEnvio;
 import pantallas.Loginn;
 import pantallas.PantallaProducto;
 import pantallas.Puertos;
@@ -22,10 +24,10 @@ public class Main {
 		
 			
 		
-	/*
+	
 		Conexion conexion = new Conexion ();
 		Connection con = conexion.conectar(); 
-		
+	/*	
 		
 		
 		Encargado encargado = new Encargado ("", "", "", "", "", 0);
@@ -40,23 +42,15 @@ public class Main {
 		
 		JOptionPane.showMessageDialog(null, "probando rama");
 		
-
+			*/
 	
 		Loginn log = new Loginn();
 		log.run();
 		
-		*/
 	
-		CargaContenedor c = new CargaContenedor();
-		
-		c.run();
-		
 		
 	
 	
-		
-		
-		
 	}
 
 }
