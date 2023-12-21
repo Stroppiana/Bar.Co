@@ -110,11 +110,21 @@ public class PantallaEncargado extends JFrame {
 			}
 		});
 		
-		JButton clientes = new JButton("CLIENTES");
-		clientes.setBackground(new Color(0, 179, 179));
-		clientes.setFont(new Font("OCR A Extended", Font.PLAIN, 12));
-		clientes.setBounds(449, 299, 137, 41);
-		contentPane.add(clientes);
+		JButton envios = new JButton("ENVIOS");
+		envios.setBackground(new Color(0, 179, 179));
+		envios.setFont(new Font("OCR A Extended", Font.PLAIN, 12));
+		envios.setBounds(449, 299, 137, 41);
+		contentPane.add(envios);
+		
+		envios.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				PantallaMostrarEnvios env = new PantallaMostrarEnvios();
+				env.run();
+				dispose();
+				
+			}
+		});
 		
 		JButton salir = new JButton("SALIR");
 		salir.setBackground(new Color(0, 179, 179));

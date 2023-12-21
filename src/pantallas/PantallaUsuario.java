@@ -3,6 +3,8 @@ package pantallas;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+import logica.Cliente;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -34,7 +36,6 @@ public class PantallaUsuario extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        int idCliente= 0;
         String nombreCliente = "";
         
         lblNewLabel = new JLabel("Bienvenido! " + nombreCliente);
@@ -63,9 +64,10 @@ public class PantallaUsuario extends JFrame {
         contentPane.add(btnVerInformacionEnvios);
         btnVerInformacionEnvios.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Aquí puedes manejar la lógica para "Ver información de envíos"
-                // Por ejemplo, puedes mostrar u ocultar componentes en la misma ventana
-                lblNewLabel.setText("Información de envíos aquí");
+      
+            	
+            	EnvioCliente envio = new EnvioCliente();
+            	envio.run();
             }
         });
 
@@ -87,7 +89,4 @@ public class PantallaUsuario extends JFrame {
             }
         });
     }
-
-
-        
 }

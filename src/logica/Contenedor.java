@@ -13,6 +13,8 @@ public class Contenedor {
 	
 	private int idContenedor;
 	private int toneladas;
+	private int idProducto;
+	private Producto producto;
 	//private boolean disponibilidad;
 	
 	public Contenedor(int idContenedor,int toneladas) {
@@ -39,6 +41,26 @@ public class Contenedor {
 		this.toneladas = toneladas;
 	}
 	
+	
+	
+	public int getIdProducto() {
+		return idProducto;
+	}
+
+	public void setIdProducto(int idProducto) {
+		this.idProducto = idProducto;
+	}
+
+	public Producto getProducto() {
+		return producto;
+	}
+
+	public void setProducto(Producto producto) {
+		this.producto = producto;
+	}
+
+
+
 	Conexion conexion = new Conexion ();
 	Connection con = conexion.conectar(); 
 	PreparedStatement stmt;

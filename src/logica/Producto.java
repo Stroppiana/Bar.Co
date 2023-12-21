@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.LinkedList;
+
 import datos.Conexion;
 
 public class Producto {
@@ -147,6 +148,39 @@ public class Producto {
 		
 		return idProducto;
 	}
+	
+	
+	/*public Producto obtenerProducto(int idProducto) {
+	    String sql = "SELECT * FROM `cliente` WHERE id_cliente=?";
+	    Cliente cliente = null;
+
+	    try (PreparedStatement stmt = con.prepareStatement(sql)) {
+	        stmt.setInt(1, idCliente);
+
+	        try (ResultSet resultados = stmt.executeQuery()) {
+	            if (resultados.next()) {
+	            	
+	                int id = resultados.getInt("id_cliente");
+	                String nombre = resultados.getString("nombre"); 
+	                String apellido = resultados.getString("apellido"); 
+	                String usuario = resultados.getString("usuario"); 
+	                String clave = resultados.getString("clave"); 
+
+
+	                
+	                cliente = new Cliente(id, nombre, apellido, usuario, clave); 
+
+	                return cliente;
+	            } else {
+	                return null;
+	            }
+	        }
+		} catch (Exception e) {
+		    e.printStackTrace();
+		    JOptionPane.showMessageDialog(null, "Error en el inicio de sesión");
+		    return null;
+		}
+	}*/
 
 
 }

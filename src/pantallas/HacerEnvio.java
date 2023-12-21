@@ -11,6 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import logica.Barco;
+import logica.Cliente;
+import logica.Divisa;
 import logica.Envio;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
@@ -26,6 +28,7 @@ public class HacerEnvio extends JFrame {
 	private JPanel contentPane;
 	private int idBarco;
 	private JTextField fecha;
+    private Cliente clienteSeleccionado;
 	
 	/**
 	 * Launch the application.
@@ -97,16 +100,58 @@ public class HacerEnvio extends JFrame {
 		contentPane.add(fecha);
 		fecha.setColumns(10);
 		
+		
+		JButton elegirCliente = new JButton("CLIENTE");
+		elegirCliente.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
+		elegirCliente.setBackground(new Color(0, 179, 179));
+		elegirCliente.setBounds(20, 264, 188, 31);
+		contentPane.add(elegirCliente);
+		
+
+		elegirCliente.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        Cliente cliente = new Cliente();
+		        LinkedList<Cliente> clientes = cliente.mostrarClientes();
+
+		        if (!clientes.isEmpty()) {
+		            String[] opcionesCliente = new String[clientes.size()];
+
+		            for (int i = 0; i < clientes.size(); i++) {
+		            	opcionesCliente[i] = clientes.get(i).getNombre();
+		            }
+
+		            int seleccionada = JOptionPane.showOptionDialog(contentPane,
+		                    "Selecciona un CLIENTE:",
+		                    "Selección de CLIENTE",
+		                    JOptionPane.DEFAULT_OPTION,
+		                    JOptionPane.QUESTION_MESSAGE,
+		                    null,
+		                    opcionesCliente,
+		                    opcionesCliente[0]);
+
+		            if (seleccionada >= 0) {
+		            	clienteSeleccionado = clientes.get(seleccionada);
+		                JOptionPane.showMessageDialog(null,
+		                        "Has seleccionado la divisa: " + opcionesCliente[seleccionada],
+		                        "Divisa Seleccionada",
+		                        JOptionPane.INFORMATION_MESSAGE);
+		            }
+		        } else {
+		            JOptionPane.showMessageDialog(contentPane, "No hay divisas disponibles.", "Error", JOptionPane.ERROR_MESSAGE);
+		        }
+		    }
+		});
+		
 		JButton aceptar = new JButton("ACEPTAR");
 		aceptar.setFont(new Font("OCR A Extended", Font.PLAIN, 16));
 		aceptar.setBackground(new Color(0, 185, 185));
-		aceptar.setBounds(20, 283, 143, 34);
+		aceptar.setBounds(92, 330, 143, 34);
 		contentPane.add(aceptar);
 		
 		aceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				int idCliente = 1;
+				int idCliente = 0;
 				int idEncargado = 1;
 				
 				
@@ -121,7 +166,7 @@ public class HacerEnvio extends JFrame {
 			            
 			        	Envio envio = new Envio();
 						
-						if (envio.generarEnvio(fechaEnvio, fechaEntrega, idBarco, idCliente, idEncargado)) {
+						if (envio.generarEnvio(fechaEnvio, fechaEntrega, idBarco, clienteSeleccionado, idEncargado)) {
 							JOptionPane.showMessageDialog(contentPane, "ENVIO GENERADO");
 						}else {
 							JOptionPane.showMessageDialog(contentPane, "ERROR GENERAR ENVIO");
@@ -132,6 +177,9 @@ public class HacerEnvio extends JFrame {
 				
 			}
 		});
+		
+		
+		
 		
 		JButton menu = new JButton("<- Menu");
 		menu.setFont(new Font("OCR A Extended", Font.PLAIN, 12));

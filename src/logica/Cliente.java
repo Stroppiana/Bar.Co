@@ -32,6 +32,7 @@ public class Cliente extends Persona {
 	}
 	
 	
+	
 	public Cliente() {
 		
 	}
@@ -109,6 +110,39 @@ public class Cliente extends Persona {
 		
 		
 	
+	public Cliente obtenerCliente(int idCliente) {
+	    String sql = "SELECT * FROM `cliente` WHERE id_cliente=?";
+	    Cliente cliente = null;
+
+	    try (PreparedStatement stmt = con.prepareStatement(sql)) {
+	        stmt.setInt(1, idCliente);
+
+	        try (ResultSet resultados = stmt.executeQuery()) {
+	            if (resultados.next()) {
+	            	
+	                int id = resultados.getInt("id_cliente");
+	                String nombre = resultados.getString("nombre"); 
+	                String apellido = resultados.getString("apellido"); 
+	                String usuario = resultados.getString("usuario"); 
+	                String clave = resultados.getString("clave"); 
+
+
+	                
+	                cliente = new Cliente(id, nombre, apellido, usuario, clave); 
+
+	                return cliente;
+	            } else {
+	                return null;
+	            }
+	        }
+		} catch (Exception e) {
+		    e.printStackTrace();
+		    JOptionPane.showMessageDialog(null, "Error en el inicio de sesión");
+		    return null;
+		}
+	}
+
+	
 	
 	public boolean guardar () {
 		
@@ -164,6 +198,46 @@ public class Cliente extends Persona {
 		
 	}
 	
+	public LinkedList<Cliente> mostrarClientes() {
+		
+		LinkedList<Cliente> clientes = new LinkedList<>();
+
+		String sql = "SELECT * from cliente";
+
+		try {
+
+			stmt = con.prepareStatement(sql);
+			ResultSet resultados = stmt.executeQuery();
+
+			while (resultados.next()) {
+
+				int id = resultados.getInt(1);
+				String nombre = resultados.getString(2);
+				String apellido = resultados.getString(3);
+				String usuario = resultados.getString(4);
+				String clave = resultados.getString(5);
+
+				clientes.add(new Cliente(id, nombre, apellido, usuario, clave));
+				
+			}
+
+			if (clientes.isEmpty()) {
+
+				String mensaje = "No hay clientes";
+				System.out.println(mensaje);
+				return null;
+
+			} else {
+
+				return clientes;
+			}
+		} catch (Exception e) {
+
+			System.out.println("Error");
+			return null;
+		}
+
+	}
 	
 	
 	/*

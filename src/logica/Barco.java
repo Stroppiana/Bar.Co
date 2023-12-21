@@ -12,6 +12,8 @@ public class Barco {
 	private int idBarco;
 	private int combustible;
 	private int capacidadToneladas;
+	private int idContenedor;
+	private Contenedor contenedor;
 	
 	public Barco(int idBarco,int combustible, int capacidadToneladas) {
 		super();
@@ -46,6 +48,24 @@ public class Barco {
 	public void setCombustible(int combustible) {
 		this.combustible = combustible;
 	}
+	
+	
+	public int getIdContenedor() {
+		return idContenedor;
+	}
+
+	public void setIdContenedor(int idContenedor) {
+		this.idContenedor = idContenedor;
+	}
+
+	public Contenedor getContenedor() {
+		return contenedor;
+	}
+
+	public void setContenedor(Contenedor contenedor) {
+		this.contenedor = contenedor;
+	}
+
 
 	@Override
 	public String toString() {

@@ -279,7 +279,7 @@ public class PantallaEncargado implements InicioSesion {
 		
 			Envio envio =  new Envio();
 			
-			JOptionPane.showMessageDialog(null, envio.mostrarEnvios());
+		//	JOptionPane.showMessageDialog(null, envio.mostrarEnvios());
 			
 			System.out.println("ULTIMO CAMBIOS");
 			

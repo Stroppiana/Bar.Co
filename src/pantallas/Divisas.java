@@ -98,7 +98,7 @@ public class Divisas extends JFrame {
 		            cotizacion.setText("");
 		            
 		            volverAlMenu();
-
+		            dispose();
 
 		        } catch (NumberFormatException ex) {
 		            JOptionPane.showMessageDialog(contentPane, "Ingrese una cotización válida.", "Error", JOptionPane.ERROR_MESSAGE);

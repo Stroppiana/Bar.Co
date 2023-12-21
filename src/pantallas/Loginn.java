@@ -56,6 +56,7 @@ public class Loginn extends JFrame {
 		iniciarSesionBoton.setBackground(new Color(124, 155, 173));
 		iniciarSesionBoton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				IniciarSesion is= new IniciarSesion();
 				is.run();
 				dispose();
